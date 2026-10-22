@@ -1,0 +1,29 @@
+.navigation {
+  .list {
+    @include unstyled-list;
+
+    display: flex;
+    gap: rem(24);
+
+    &.isVertical {
+      flex-direction: column;
+      gap: rem(16);
+    }
+  }
+
+  .link {
+    font-weight: 500;
+    color: var(--mantine-color-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--mantine-primary-color-filled);
+    }
+  }
+
+  .isVertical .link {
+    font-size: rem(20);
+  }
+}

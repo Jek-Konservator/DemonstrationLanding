@@ -3,6 +3,36 @@
     "title": "AI Practicum — AI tools for your job",
     "description": "Online course: in 6 weeks, learn to use AI at work — writing, analytics, presentations and automating routine tasks."
   },
+  "Layout": {
+    "Logo": {
+      "name": "AI Practicum",
+      "label": "AI Practicum — home"
+    },
+    "Header": {
+      "navigation": {
+        "label": "Page sections",
+        "audience": "Who it's for",
+        "program": "Curriculum",
+        "teacher": "Instructor",
+        "pricing": "Pricing",
+        "faq": "FAQ"
+      },
+      "cta": "Enroll",
+      "menu": "Menu",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
+    },
+    "LanguageSwitcher": {
+      "label": "Site language"
+    },
+    "Footer": {
+      "disclaimer": "Portfolio demo project: the school and the course are fictional.",
+      "copyright": "© {year} AI Practicum"
+    },
+    "ScrollTop": {
+      "label": "Back to top"
+    }
+  },
   "Sections": {
     "Main": {
       "title": "AI tools for your job",

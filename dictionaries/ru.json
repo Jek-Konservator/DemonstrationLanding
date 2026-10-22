@@ -3,6 +3,36 @@
     "title": "AI Practicum — нейросети для работы",
     "description": "Онлайн-курс: за 6 недель научитесь применять нейросети в своей работе — тексты, аналитика, презентации и автоматизация рутины."
   },
+  "Layout": {
+    "Logo": {
+      "name": "AI Practicum",
+      "label": "AI Practicum — на главную"
+    },
+    "Header": {
+      "navigation": {
+        "label": "Разделы страницы",
+        "audience": "Для кого",
+        "program": "Программа",
+        "teacher": "Преподаватель",
+        "pricing": "Тарифы",
+        "faq": "Вопросы"
+      },
+      "cta": "Записаться",
+      "menu": "Меню",
+      "openMenu": "Открыть меню",
+      "closeMenu": "Закрыть меню"
+    },
+    "LanguageSwitcher": {
+      "label": "Язык сайта"
+    },
+    "Footer": {
+      "disclaimer": "Демо-проект для портфолио: школа и курс вымышленные.",
+      "copyright": "© {year} AI Practicum"
+    },
+    "ScrollTop": {
+      "label": "Наверх"
+    }
+  },
   "Sections": {
     "Main": {
       "title": "Нейросети для работы",
