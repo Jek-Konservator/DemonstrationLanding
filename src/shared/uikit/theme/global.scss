@@ -1,0 +1,16 @@
+html {
+  scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-width: 360px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

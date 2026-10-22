@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { render } from "@testing-library/react";
+import { UiProvider } from "@ui/UiProvider";
 import { NextIntlClientProvider } from "next-intl";
 import ru from "../../../dictionaries/ru.json";
 
@@ -7,6 +8,6 @@ import ru from "../../../dictionaries/ru.json";
 export const renderWithProviders = (ui: ReactElement) =>
   render(
     <NextIntlClientProvider locale="ru" messages={ru}>
-      {ui}
+      <UiProvider>{ui}</UiProvider>
     </NextIntlClientProvider>,
   );

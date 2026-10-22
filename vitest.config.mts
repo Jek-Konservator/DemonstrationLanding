@@ -21,6 +21,8 @@ export default defineConfig({
         "src/middleware.ts",
         "src/shared/config/i18n/**",
         "src/shared/testing/**",
+        // next/font работает только в компиляторе Next — в vitest не проверить
+        "src/shared/uikit/theme/fonts.ts",
         "src/**/index.ts",
         "src/**/*.d.ts",
         "src/**/*.test.{ts,tsx}",

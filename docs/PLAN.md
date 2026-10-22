@@ -11,56 +11,23 @@
 
 ## Этапы
 
-- [ ] **1. Каркас** — Next.js 15 (App Router), TS strict, next-intl (ru/en), eslint (слои, Mantine только через @ui), prettier, stylelint, vitest (порог 80%), husky, lint-staged, CI.
-      Файлы записаны, НЕ проверены: `npm install` и `npm run check` ещё не запускались.
-      Нет файлов `.husky/pre-commit`, `.husky/pre-push`, `.github/workflows/ci.yml` — создать (содержимое ниже).
-- [ ] **2. Тема и Layout** — theme.scss (брейкпоинты, миксины larger-than / fadeUp / unstyled-list, rem), тема Mantine, next/font, UI Kit (Button, Container, Title, Text), Header (навигация по якорям, переключатель языка, бургер), Footer, ScrollTop.
+- [x] **1. Каркас** — Next.js 15 (App Router), TS strict, next-intl (ru/en), eslint (слои, Mantine только через @ui), prettier, stylelint, vitest (порог 80%), husky, lint-staged, CI.
+- [ ] **2. Тема и Layout** — разбит на два коммита:
+  - [x] **2a. Тема и UI Kit** — theme.scss (брейкпоинты, rem, larger-than, unstyled-list, fadeUp, высота шапки), global.scss, тема Mantine (violet, Manrope, светлая), next/font, UiProvider, Button / Container / Title / Text.
+  - [ ] **2b. Layout** — Header (навигация по якорям, переключатель языка, бургер), Footer, ScrollTop.
 - [ ] **3. Секции** — первый экран, для кого курс, программа (аккордеон), преподаватель, тарифы, FAQ. По 1–2 секции за этап.
 - [ ] **4. Форма заявки** — схема yup, адаптеры полей, стор на createQuery, состояния Loading/Success/Error, route handler `/api/lead` с отправкой в Telegram, honeypot.
 - [ ] **5. SEO** — metadata, hreflang, sitemap.ts, robots.ts, OG-картинка, JSON-LD, Lighthouse ≥ 90.
 - [ ] **6. Финал** — README со скриншотами и бейджем CI, деплой на Vercel, скриншоты и видео для Kwork.
 
-## Файлы, которые нужно создать на этапе 1
+## Принятые решения
 
-`.husky/pre-commit`
-
-```
-npx lint-staged
-npm run typecheck
-npm run test
-```
-
-`.husky/pre-push`
-
-```
-npm run build
-```
-
-`.github/workflows/ci.yml`
-
-```yaml
-name: CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-
-jobs:
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm ci
-      - run: npm run check
-      - run: npm run build
-```
-
-## Известные вопросы
-
-- ESLint 8 + `@vercel/style-guide` 5 взяты из рабочих проектов Романа. На первом прогоне возможны правила, которые надо отключить. ESLint 8 снят с поддержки — можно обсудить переход на 9.
-- Prettier схлопывает две пустые строки после импортов в одну — правило «две пустые строки» из гайда с ним несовместимо, предложено убрать из гайда.
+- ESLint 9 с flat config (`eslint.config.mjs`) вместо ESLint 8 + `@vercel/style-guide`: style-guide 5 конфликтует с `@next/eslint-plugin-next` 15 и больше не развивается.
+- `eslint.config.mjs` не игнорируется линтером: по нему `next build` проверяет, подключён ли плагин `@next/next`.
+- В lint-staged у eslint флаг `--no-warn-ignored`: иначе игнорируемый файл в коммите (`next.config.ts`) даёт warning и роняет хук.
+- В `vitest.setup.ts` — `cleanup()` после каждого теста: без `globals: true` RTL сам DOM не чистит.
+- После импортов — одна пустая строка (prettier схлопывает две).
+- Версия Node — из `.nvmrc` (22): `engines`, CI (`node-version-file`), Vercel.
+- `UiProvider` — клиентский компонент: тема собирается через `Component.extend`, а на сервере компоненты Mantine — ссылки без методов. `UiColorSchemeScript` и `uiHtmlProps` — в отдельном серверном файле.
+- Шрифт (`@ui/theme/fonts`) не реэкспортируется из `@ui/theme`: `next/font` работает только в компиляторе Next, в vitest — нет. Файл исключён из покрытия.
+- UI Kit — реэкспорты Mantine (сохраняется полиморфизм `component={Link}`), умолчания — в `theme.ts` через `Component.extend`.
