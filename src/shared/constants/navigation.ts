@@ -1,5 +1,6 @@
 // id секций лендинга: якоря в навигации и id у <section>
 export const NAVIGATION_NAMES = {
+  main: "main",
   audience: "audience",
   program: "program",
   teacher: "teacher",

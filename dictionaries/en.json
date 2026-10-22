@@ -35,8 +35,48 @@
   },
   "Sections": {
     "Main": {
+      "badge": "Online · 6 weeks · with a mentor",
       "title": "AI tools for your job",
-      "description": "A hands-on online course: in 6 weeks you will set up AI tools for your own tasks and start saving hours every week."
+      "description": "A hands-on online course: in 6 weeks you will set up AI tools for your own tasks and start saving hours every week.",
+      "primaryButton": "Enroll in the course",
+      "secondaryButton": "See the curriculum",
+      "stats": {
+        "label": "The course in numbers",
+        "weeks": {
+          "value": "6",
+          "label": "weeks of practice"
+        },
+        "tasks": {
+          "value": "24",
+          "label": "reviewed assignments"
+        },
+        "graduates": {
+          "value": "1,200+",
+          "label": "graduates"
+        }
+      }
+    },
+    "Audience": {
+      "title": "Who the course is for",
+      "description": "No coding required: you will learn to solve work tasks in the tools you already use.",
+      "list": {
+        "office": {
+          "name": "Office professionals",
+          "description": "Emails, reports and meeting notes in minutes instead of hours."
+        },
+        "marketing": {
+          "name": "Marketers",
+          "description": "Ideas, copy and visuals for campaigns, review and competitor analysis."
+        },
+        "analytics": {
+          "name": "Analysts",
+          "description": "Making sense of spreadsheets, formulas and insights without manual routine."
+        },
+        "business": {
+          "name": "Business owners",
+          "description": "Automated sales and support, quick drafts of documents."
+        }
+      }
     }
   }
 }
