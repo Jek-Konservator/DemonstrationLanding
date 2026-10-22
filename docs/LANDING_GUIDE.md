@@ -54,22 +54,22 @@
 
 ## 1. Стек
 
-| Задача          | Чем делаем                                                                                                                                    |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Фреймворк       | Next.js (App Router), React, TypeScript `strict` + `noUncheckedIndexedAccess`                                                                 |
-| Рендеринг       | Статика (SSG) + ISR через `revalidate`                                                                                                        |
-| UI              | Mantine 7 через свой UI Kit (`shared/uikit`) — кнопки, инпуты, модалки, табы, аккордеоны                                                      |
-| Вёрстка секций  | SCSS-модули + глобальные переменные и миксины `theme.scss`                                                                                    |
-| Классы          | `clsx`                                                                                                                                        |
-| Шрифты          | `next/font`                                                                                                                                   |
-| Картинки        | `next/image`, SVG — через `@svgr/webpack` как React-компоненты                                                                                |
-| Мультиязычность | `next-intl` (если сайт на нескольких языках)                                                                                                  |
-| Состояние       | effector + effector-react — только UI-состояние между секциями (модалка, выбранный таб)                                                       |
-| Запросы         | `@farfetched/core` — только `createQuery` (отправка формы)                                                                                    |
-| Формы           | react-hook-form + yup                                                                                                                         |
-| Защита формы    | Яндекс SmartCaptcha или honeypot                                                                                                              |
-| Тесты           | vitest, @testing-library/react, @testing-library/user-event, jsdom, @vitest/coverage-v8                                                       |
-| Качество        | prettier + sort-imports, eslint (`@vercel/style-guide`), stylelint (`stylelint-config-standard-scss` + `stylelint-order`), husky, lint-staged |
+| Задача          | Чем делаем                                                                                                                                                                                                                         |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Фреймворк       | Next.js (App Router), React, TypeScript `strict` + `noUncheckedIndexedAccess`                                                                                                                                                      |
+| Рендеринг       | Статика (SSG) + ISR через `revalidate`                                                                                                                                                                                             |
+| UI              | Mantine 7 через свой UI Kit (`shared/uikit`) — кнопки, инпуты, модалки, табы, аккордеоны                                                                                                                                           |
+| Вёрстка секций  | SCSS-модули + глобальные переменные и миксины `theme.scss`                                                                                                                                                                         |
+| Классы          | `clsx`                                                                                                                                                                                                                             |
+| Шрифты          | `next/font`                                                                                                                                                                                                                        |
+| Картинки        | `next/image`, SVG — через `@svgr/webpack` как React-компоненты                                                                                                                                                                     |
+| Мультиязычность | `next-intl` (если сайт на нескольких языках)                                                                                                                                                                                       |
+| Состояние       | effector + effector-react — только UI-состояние между секциями (модалка, выбранный таб)                                                                                                                                            |
+| Запросы         | `@farfetched/core` — только `createQuery` (отправка формы)                                                                                                                                                                         |
+| Формы           | react-hook-form + yup                                                                                                                                                                                                              |
+| Защита формы    | Яндекс SmartCaptcha или honeypot                                                                                                                                                                                                   |
+| Тесты           | vitest, @testing-library/react, @testing-library/user-event, jsdom, @vitest/coverage-v8                                                                                                                                            |
+| Качество        | prettier + sort-imports, eslint 9, flat config (typescript-eslint, react, react-hooks, jsx-a11y, import, @next/next, eslint-config-prettier), stylelint (`stylelint-config-standard-scss` + `stylelint-order`), husky, lint-staged |
 
 **Версии:**
 
@@ -340,7 +340,7 @@ export const SectionAdvantages: FC<SectionAdvantagesProps> = ({ id }) => {
 {
   "scripts": {
     "format:check": "prettier --check .",
-    "lint": "eslint . --ext .ts,.tsx --max-warnings=0",
+    "lint": "eslint . --max-warnings=0",
     "stylelint": "stylelint \"src/**/*.scss\" --allow-empty-input",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --coverage",
@@ -350,7 +350,7 @@ export const SectionAdvantages: FC<SectionAdvantagesProps> = ({ id }) => {
 ```
 
 - husky `pre-commit`: `npx lint-staged`, `npm run typecheck`, `npm run test`.
-- lint-staged — только по файлам коммита: `*.{ts,tsx}` → prettier + eslint; `*.scss` → prettier + `stylelint --fix`; `*.{json,md}` → prettier. Никаких «обходов», которые прогоняют всю папку: если упираемся в длину командной строки — коммит слишком большой, разбиваем.
+- lint-staged — только по файлам коммита: `*.{ts,tsx}` → prettier + `eslint --fix --max-warnings=0 --no-warn-ignored` (без флага игнорируемый файл в коммите даёт warning и роняет хук); `*.scss` → prettier + `stylelint --fix`; `*.{json,md}` → prettier. Никаких «обходов», которые прогоняют всю папку: если упираемся в длину командной строки — коммит слишком большой, разбиваем.
 - husky `pre-push`: `npm run build`.
 - CI — `.github/workflows/ci.yml`, создаётся в этапе каркаса:
   ```yaml
