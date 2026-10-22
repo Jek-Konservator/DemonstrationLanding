@@ -9,6 +9,34 @@
 - Репозиторий публичный, демо — на Vercel. Даты коммитов не подделываем, история — настоящая.
 - Роман должен понимать каждую строчку: на непонятное — объяснять, а не просто писать код.
 
+## Где остановились (23.10.2026)
+
+**Состояние репозитория**
+
+- Работаем в ветке `dev`, последний коммит — `41d0491 feat(audience): секция «Для кого курс»`. Рабочая копия чистая, `npm run check` и `npm run build` зелёные, покрытие 100%.
+- `dev` никуда не запушен и не слит в `main`. На `main` — только каркас (`0e2c2b8`, в нём по ошибке старый `package.json` с ESLint 8 — исправлено в `dev` коммитом `c42940e`, в `main` попадёт при слиянии).
+- Готово: каркас, тема и UI Kit, Header / Footer / ScrollTop, первый экран (`SectionMain`), «Для кого курс» (`SectionAudience`), svgr.
+
+**Следующий шаг — этап 3b: «Программа курса» (аккордеон) и «Преподаватель»**
+
+- Открытый вопрос к Роману: откуда фото преподавателя — Unsplash (нейтральный портрет, пометить как стоковое), SVG-аватар или своя картинка. Без ответа секцию «Преподаватель» не начинать.
+- Для аккордеона добавить в UI Kit `Accordion` (реэкспорт Mantine, как Button), id секции — `NAVIGATION_NAMES.program`.
+- Секции — по образцу `src/screens/Main/ui/SectionAudience/`: папка, `constants.ts`, `styles.module.scss`, тест (`section` с id, заголовок h2, элементы из констант), тексты в `Sections.<Name>` обоих словарей. Порядок секций — в `src/screens/Main/index.tsx` и его тесте.
+
+**Открытые хвосты**
+
+- Гайд (`docs/LANDING_GUIDE.md`) расходится с кодом в двух местах — предложить Роману `docs`-коммит:
+  - раздел 4: пример `clsx({ [styles.isVisible]: isVisible })` не компилируется с `noUncheckedIndexedAccess`, пишем `clsx(styles.a, isX && styles.isX)`;
+  - раздел 7: SVG-компонент импортируется как `icon.svg?react`, а `?url` даёт `StaticImageData`, а не строку.
+- First Load JS — 269 kB (Drawer в шапке). Разобрать на этапе 5 (bundle-analyzer, мобильное меню через `dynamic`).
+- `SERVER_ENV` / `CLIENT_ENV` (yup-валидация env, `shared/config/env`) ещё не сделаны; в `.env.example` пока только `NEXT_PUBLIC_SITE_URL`. Нужны на этапе 4 (ключи Telegram) и 5 (адрес сайта).
+
+**Как работаем с git (важно)**
+
+- В индекс сами попадают лишние файлы (похоже, WebStorm добавляет новые файлы в VCS), и WebStorm уже однажды записал старые версии `package.json` и `docs/` поверх новых. Поэтому коммитим только так: `git add <пути> && git commit -- <пути>`, после — `git show --stat HEAD`. Перед коммитом сверять `package.json` и `docs/` с договорённым.
+- Перед коммитом Роман смотрит diff; коммиты — после его «ок». Сообщения — conventional commits на русском, конфиги отдельно от кода, до 15–20 файлов.
+- Проверка вёрстки: `npm run build && npx next start -p 3123`, скриншоты headless Edge (`--headless=old --screenshot`). Окно уже 492px Windows не даёт — для 360px открывать страницу в `<iframe width="360">`.
+
 ## Этапы
 
 - [x] **1. Каркас** — Next.js 15 (App Router), TS strict, next-intl (ru/en), eslint (слои, Mantine только через @ui), prettier, stylelint, vitest (порог 80%), husky, lint-staged, CI.
