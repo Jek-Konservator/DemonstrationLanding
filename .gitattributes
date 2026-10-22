@@ -1,0 +1,2 @@
+# Prettier ждёт LF — не даём git на Windows превращать переносы в CRLF
+* text=auto eol=lf
