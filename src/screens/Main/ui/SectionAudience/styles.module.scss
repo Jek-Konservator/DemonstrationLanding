@@ -1,0 +1,51 @@
+.sectionAudience {
+  padding-block: rem(64);
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    padding-block: rem(112);
+  }
+
+  .title {
+    font-size: rem(28);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(44);
+    }
+  }
+
+  .description {
+    font-size: rem(18);
+    color: var(--mantine-color-dimmed);
+    max-width: rem(620);
+    margin-top: rem(12);
+  }
+
+  .list {
+    @include unstyled-list;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: rem(16);
+    margin-top: rem(40);
+
+    @include larger-than(map.get($breakpoints, "sm")) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include larger-than(map.get($breakpoints, "lg")) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: rem(24);
+    }
+  }
+
+  // Карточки появляются по очереди
+  .item {
+    @include fadeUp;
+
+    @for $i from 2 through 4 {
+      &:nth-child(#{$i}) {
+        transition-delay: ($i - 1) * 0.1s;
+      }
+    }
+  }
+}

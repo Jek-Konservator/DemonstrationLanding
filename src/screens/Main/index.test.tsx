@@ -1,24 +1,23 @@
 import { screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { NAVIGATION_NAMES } from "@shared/constants/navigation";
 import { renderWithProviders } from "@shared/testing";
 import MainPage from ".";
-import ru from "../../../dictionaries/ru.json";
 
 describe("MainPage", () => {
-  it("рендерит заголовок первого экрана", () => {
-    renderWithProviders(<MainPage />);
+  it("рендерит секции по порядку", () => {
+    const { container } = renderWithProviders(<MainPage />);
 
-    expect(
-      screen.getByRole("heading", {
-        level: 1,
-        name: ru.Sections.Main.title,
-      }),
-    ).toBeInTheDocument();
+    const ids = [...container.querySelectorAll("section")].map(
+      (section) => section.id,
+    );
+
+    expect(ids).toEqual([NAVIGATION_NAMES.main, NAVIGATION_NAMES.audience]);
   });
 
-  it("рендерит описание курса", () => {
+  it("на странице один h1", () => {
     renderWithProviders(<MainPage />);
 
-    expect(screen.getByText(ru.Sections.Main.description)).toBeInTheDocument();
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
   });
 });

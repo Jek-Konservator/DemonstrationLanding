@@ -1,21 +1,12 @@
-import { Container } from "@ui/Container";
-import { Text } from "@ui/Text";
-import { Title } from "@ui/Title";
-import { useTranslations } from "next-intl";
+import { NAVIGATION_NAMES } from "@shared/constants/navigation";
+import { SectionAudience, SectionMain } from "./ui";
 
-// Экран главной страницы: собирает секции по порядку.
-// Пока — заглушка первого экрана, секции появятся на следующих этапах.
-const MainPage = () => {
-  const translate = useTranslations("Sections.Main");
-
-  return (
-    <main>
-      <Container>
-        <Title order={1}>{translate("title")}</Title>
-        <Text>{translate("description")}</Text>
-      </Container>
-    </main>
-  );
-};
+// Экран главной страницы: порядок секций задаётся только здесь
+const MainPage = () => (
+  <main>
+    <SectionMain id={NAVIGATION_NAMES.main} />
+    <SectionAudience id={NAVIGATION_NAMES.audience} />
+  </main>
+);
 
 export default MainPage;
