@@ -5,6 +5,7 @@ import { UiColorSchemeScript, uiHtmlProps, UiProvider } from "@ui/UiProvider";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@shared/config/i18n/routing";
+import { Footer, Header, ScrollTop } from "@features/Layout";
 
 interface LocaleLayoutProps {
   children: ReactNode;
@@ -30,7 +31,12 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
       </head>
       <body>
         <NextIntlClientProvider>
-          <UiProvider>{children}</UiProvider>
+          <UiProvider>
+            <Header />
+            {children}
+            <Footer />
+            <ScrollTop />
+          </UiProvider>
         </NextIntlClientProvider>
       </body>
     </html>

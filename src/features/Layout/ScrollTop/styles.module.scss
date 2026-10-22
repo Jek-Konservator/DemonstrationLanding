@@ -1,0 +1,38 @@
+.scrollTop {
+  position: fixed;
+  z-index: 90;
+  right: rem(16);
+  bottom: rem(16);
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s;
+  transform: translateY(rem(16));
+
+  &.isVisible {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    right: rem(32);
+    bottom: rem(32);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  // Стрелка вверх: уголок из двух рамок, повёрнутый на 45°
+  .arrow {
+    width: rem(12);
+    height: rem(12);
+    margin-top: rem(4);
+    transform: rotate(45deg);
+    border-top: 2px solid currentcolor;
+    border-left: 2px solid currentcolor;
+  }
+}
