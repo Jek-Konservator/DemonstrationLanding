@@ -14,3 +14,12 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+// Якорь не прячет начало секции под липкой шапкой
+section[id] {
+  scroll-margin-top: $header-height;
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    scroll-margin-top: $header-height-desktop;
+  }
+}
