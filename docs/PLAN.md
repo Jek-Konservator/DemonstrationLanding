@@ -13,14 +13,14 @@
 
 **Состояние репозитория**
 
-- Работаем в ветке `dev`, последние коммиты — `f92f515 feat(program): секция «Программа курса» с аккордеоном` и `d40f432 feat(teacher): секция «Преподаватель»`. Рабочая копия чистая, `npm run check` и `npm run build` зелёные, покрытие 100%.
+- Работаем в ветке `dev`, последние коммиты — `a03722f feat(pricing): секция «Тарифы»` и `fd6e39a feat(faq): секция «Частые вопросы»`. Рабочая копия чистая, `npm run check` и `npm run build` зелёные, покрытие 100%.
 - `dev` никуда не запушен и не слит в `main`. На `main` — только каркас (`0e2c2b8`, в нём по ошибке старый `package.json` с ESLint 8 — исправлено в `dev` коммитом `c42940e`, в `main` попадёт при слиянии).
-- Готово: каркас, тема и UI Kit (+ `Accordion`), Header / Footer / ScrollTop, первый экран (`SectionMain`), «Для кого курс» (`SectionAudience`), «Программа курса» (`SectionProgram`), «Преподаватель» (`SectionTeacher`), svgr.
+- Готово: каркас, тема и UI Kit (+ `Accordion`), Header / Footer / ScrollTop, svgr и все секции этапа 3: первый экран (`SectionMain`), «Для кого курс» (`SectionAudience`), «Программа курса» (`SectionProgram`), «Преподаватель» (`SectionTeacher`), «Тарифы» (`SectionPricing`), FAQ (`SectionFaq`).
 
-**Следующий шаг — этап 3c: «Тарифы» и FAQ**
+**Следующий шаг — этап 4: форма заявки**
 
-- FAQ — на том же `@ui/Accordion` (умолчания `variant: "separated"`, `radius: "lg"` уже в теме), id — `NAVIGATION_NAMES.faq`.
-- Тарифы — id `NAVIGATION_NAMES.pricing`, кнопки тарифов ведут на `#feedback` (форма — этап 4).
+- Секция `feedback` (id `NAVIGATION_NAMES.feedback`) — на неё уже ведут кнопки первого экрана, шапки и тарифов. Встаёт после FAQ.
+- Перед формой — `SERVER_ENV` / `CLIENT_ENV` (см. хвосты): токен бота и chat id Telegram. Состав этапа — в разделе 8 гайда; план по файлам согласовать с Романом до начала.
 - Секции — по образцу `src/screens/Main/ui/SectionAudience/`: папка, `constants.ts`, `styles.module.scss`, тест (`section` с id, заголовок h2, элементы из констант), тексты в `Sections.<Name>` обоих словарей. Порядок секций — в `src/screens/Main/index.tsx` и его тесте.
 
 **Открытые хвосты**
@@ -43,10 +43,10 @@
 - [x] **2. Тема и Layout** — разбит на два коммита:
   - [x] **2a. Тема и UI Kit** — theme.scss (брейкпоинты, rem, larger-than, unstyled-list, fadeUp, высота шапки), global.scss, тема Mantine (violet, Manrope, светлая), next/font, UiProvider, Button / Container / Title / Text.
   - [x] **2b. Layout** — Header (навигация по якорям, переключатель языка, бургер с Drawer), Footer, ScrollTop; тест совпадения ключей словарей.
-- [ ] **3. Секции** — первый экран, для кого курс, программа (аккордеон), преподаватель, тарифы, FAQ. По 1–2 секции за этап.
+- [x] **3. Секции** — первый экран, для кого курс, программа (аккордеон), преподаватель, тарифы, FAQ. По 1–2 секции за этап.
   - [x] **3a.** Первый экран (SectionMain), «Для кого курс» (SectionAudience), svgr, `useIntersectionObserver`.
   - [x] **3b.** Программа (аккордеон), преподаватель, `Accordion` в UI Kit.
-  - [ ] **3c.** Тарифы, FAQ.
+  - [x] **3c.** Тарифы (`PricingCard`), FAQ.
 - [ ] **4. Форма заявки** — схема yup, адаптеры полей, стор на createQuery, состояния Loading/Success/Error, route handler `/api/lead` с отправкой в Telegram, honeypot.
 - [ ] **5. SEO** — metadata, hreflang, sitemap.ts, robots.ts, OG-картинка, JSON-LD, Lighthouse ≥ 90.
       После Header First Load JS — 268 kB (было 104): Drawer тянет Modal/FocusTrap/Portal. Проверить bundle-analyzer, при необходимости — мобильное меню через `dynamic`.
@@ -71,3 +71,4 @@
 - Первый экран без фото и без анимации появления (LCP не ждёт JS), фон — CSS-градиент.
 - Accordion: `order={3}` оборачивает кнопки пунктов в `h3` (заголовок внутри `<button>` — невалидный HTML). Accordion не принимает `ref` — `useIntersectionObserver` вешаем на обёртку `div`.
 - Преподаватель — вымышленный, вместо фото SVG-иллюстрация (`currentColor`, цвет из SCSS, `role="img"` + `aria-label` из словаря). Секция статичная — серверный компонент без анимации появления.
+- Состав тарифов — в `constants.ts` (`PRICING_FEATURES`), тексты пунктов в словаре один раз (`Sections.Pricing.features`). Тарифы — серверный компонент, FAQ — клиентский (появление при скролле). У FAQ серый фон, пункты аккордеона белые через `classNames.item`.
