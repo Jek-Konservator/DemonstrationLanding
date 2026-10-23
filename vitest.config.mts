@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -6,6 +7,15 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   // svgr — как в Next: icon.svg?react становится React-компонентом
   plugins: [tsconfigPaths(), react(), svgr()],
+  resolve: {
+    alias: {
+      // В Next server-only пустой на сервере (условие react-server) и падает в браузере.
+      // В vitest этого условия нет — подставляем пустой модуль, как на сервере
+      "server-only": fileURLToPath(
+        new URL("node_modules/server-only/empty.js", import.meta.url),
+      ),
+    },
+  },
   test: {
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
