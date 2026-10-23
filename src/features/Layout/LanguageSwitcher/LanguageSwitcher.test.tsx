@@ -9,10 +9,10 @@ describe("LanguageSwitcher", () => {
     renderWithProviders(<LanguageSwitcher />);
 
     expect(
-      screen.getByRole("link", { name: LOCALE_LABEL_MAP.ru }),
+      screen.getByRole("link", { name: `RU — ${LOCALE_LABEL_MAP.ru}` }),
     ).toHaveAttribute("href", "/ru");
     expect(
-      screen.getByRole("link", { name: LOCALE_LABEL_MAP.en }),
+      screen.getByRole("link", { name: `EN — ${LOCALE_LABEL_MAP.en}` }),
     ).toHaveAttribute("href", "/en");
   });
 
@@ -20,10 +20,10 @@ describe("LanguageSwitcher", () => {
     renderWithProviders(<LanguageSwitcher />);
 
     expect(
-      screen.getByRole("link", { name: LOCALE_LABEL_MAP.ru }),
+      screen.getByRole("link", { name: `RU — ${LOCALE_LABEL_MAP.ru}` }),
     ).toHaveAttribute("aria-current", "true");
     expect(
-      screen.getByRole("link", { name: LOCALE_LABEL_MAP.en }),
+      screen.getByRole("link", { name: `EN — ${LOCALE_LABEL_MAP.en}` }),
     ).not.toHaveAttribute("aria-current");
   });
 });

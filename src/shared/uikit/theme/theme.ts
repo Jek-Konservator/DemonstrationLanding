@@ -4,7 +4,9 @@ import {
   Container,
   createTheme,
   Title,
+  type CSSVariablesResolver,
 } from "@mantine/core";
+import { THEME_COLORS } from "./colors";
 import { PRIMARY_COLOR, PRIMARY_SHADE } from "./primary";
 
 // Совпадают с $breakpoints в theme.scss — проверяется тестом
@@ -40,4 +42,11 @@ export const theme = createTheme({
       defaultProps: { textWrap: "balance" },
     }),
   },
+});
+
+// Приглушённый текст темнее, чем у Mantine по умолчанию, — ради контраста (WCAG AA)
+export const cssVariablesResolver: CSSVariablesResolver = () => ({
+  variables: {},
+  light: { "--mantine-color-dimmed": THEME_COLORS.dimmed },
+  dark: {},
 });

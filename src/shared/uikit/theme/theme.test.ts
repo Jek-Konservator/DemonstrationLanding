@@ -1,7 +1,9 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { DEFAULT_THEME } from "@mantine/core";
 import { describe, expect, it } from "vitest";
-import { BREAKPOINTS } from "./theme";
+import { THEME_COLORS } from "./colors";
+import { BREAKPOINTS, cssVariablesResolver } from "./theme";
 
 const readScssBreakpoints = () => {
   const scss = readFileSync(resolve(__dirname, "theme.scss"), "utf8");
@@ -15,5 +17,11 @@ const readScssBreakpoints = () => {
 describe("theme", () => {
   it("брейкпоинты в theme.scss совпадают с темой Mantine", () => {
     expect(readScssBreakpoints()).toEqual(BREAKPOINTS);
+  });
+
+  it("приглушённый текст — цвет с достаточным контрастом", () => {
+    expect(cssVariablesResolver(DEFAULT_THEME).light).toEqual({
+      "--mantine-color-dimmed": THEME_COLORS.dimmed,
+    });
   });
 });

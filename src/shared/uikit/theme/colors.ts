@@ -10,6 +10,7 @@ export const THEME_COLORS = {
   primaryLight: primary[0],
   primarySoft: primary[1],
   text: DEFAULT_THEME.black,
-  dimmed: DEFAULT_THEME.colors.gray[6],
+  // gray.6 по умолчанию на белом — контраст 3.3, для текста нужно от 4.5
+  dimmed: DEFAULT_THEME.colors.gray[7],
   body: DEFAULT_THEME.white,
 };

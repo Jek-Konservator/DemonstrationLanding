@@ -22,7 +22,8 @@ export const LanguageSwitcher = ({ className }: LanguageSwitcherProps) => {
         <li key={locale}>
           <Link
             aria-current={locale === currentLocale ? "true" : undefined}
-            aria-label={LOCALE_LABEL_MAP[locale]}
+            // Имя начинается с видимого «RU»: так ссылку найдёт и голосовое управление
+            aria-label={`${locale.toUpperCase()} — ${LOCALE_LABEL_MAP[locale]}`}
             className={styles.link}
             href="/"
             hrefLang={locale}

@@ -4,7 +4,7 @@ import "@mantine/core/styles.css";
 import "@ui/theme/global.scss";
 import type { ReactNode } from "react";
 import { MantineProvider } from "@mantine/core";
-import { theme } from "@ui/theme";
+import { cssVariablesResolver, theme } from "@ui/theme";
 
 interface UiProviderProps {
   children: ReactNode;
@@ -14,7 +14,11 @@ interface UiProviderProps {
 // Mantine — лишь ссылки на клиентский код, без методов.
 // Тёмной темы на лендинге нет — светлая зафиксирована здесь и в ColorScheme.tsx
 export const UiProvider = ({ children }: UiProviderProps) => (
-  <MantineProvider forceColorScheme="light" theme={theme}>
+  <MantineProvider
+    cssVariablesResolver={cssVariablesResolver}
+    forceColorScheme="light"
+    theme={theme}
+  >
     {children}
   </MantineProvider>
 );

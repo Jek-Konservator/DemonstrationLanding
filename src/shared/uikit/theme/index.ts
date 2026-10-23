@@ -1,1 +1,1 @@
-export { BREAKPOINTS, theme } from "./theme";
+export { BREAKPOINTS, cssVariablesResolver, theme } from "./theme";
