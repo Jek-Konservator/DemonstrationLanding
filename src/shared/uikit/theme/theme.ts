@@ -5,6 +5,7 @@ import {
   createTheme,
   Title,
 } from "@mantine/core";
+import { PRIMARY_COLOR, PRIMARY_SHADE } from "./primary";
 
 // Совпадают с $breakpoints в theme.scss — проверяется тестом
 export const BREAKPOINTS = {
@@ -16,8 +17,8 @@ export const BREAKPOINTS = {
 };
 
 export const theme = createTheme({
-  primaryColor: "violet",
-  primaryShade: 7,
+  primaryColor: PRIMARY_COLOR,
+  primaryShade: PRIMARY_SHADE,
   fontFamily: "var(--font-manrope), sans-serif",
   headings: {
     fontFamily: "var(--font-manrope), sans-serif",
