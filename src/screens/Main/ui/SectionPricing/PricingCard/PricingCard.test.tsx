@@ -4,8 +4,7 @@ import { renderWithProviders } from "@shared/testing";
 import { PricingCard } from ".";
 
 const props = {
-  buttonHref: "#feedback",
-  buttonLabel: "button",
+  action: <button type="button">action</button>,
   description: "description",
   features: ["first", "second"],
   featuresLabel: "features",
@@ -14,7 +13,7 @@ const props = {
 };
 
 describe("PricingCard", () => {
-  it("рендерит тариф, список и кнопку-ссылку", () => {
+  it("рендерит тариф, список и кнопку", () => {
     renderWithProviders(<PricingCard {...props} />);
 
     const features = screen.getByRole("list", { name: props.featuresLabel });
@@ -28,9 +27,7 @@ describe("PricingCard", () => {
         .getAllByRole("listitem")
         .map((item) => item.textContent),
     ).toEqual(props.features);
-    expect(
-      screen.getByRole("link", { name: props.buttonLabel }),
-    ).toHaveAttribute("href", props.buttonHref);
+    expect(screen.getByRole("button", { name: "action" })).toBeInTheDocument();
   });
 
   it("без popularLabel плашки нет", () => {

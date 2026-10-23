@@ -1,12 +1,12 @@
-import { Button } from "@ui/Button";
+import type { ReactNode } from "react";
 import { Text } from "@ui/Text";
 import { Title } from "@ui/Title";
 import { clsx } from "clsx";
 import styles from "./styles.module.scss";
 
 interface PricingCardProps {
-  buttonHref: string;
-  buttonLabel: string;
+  // Кнопка внизу карточки — её поведение задаёт секция
+  action: ReactNode;
   description: string;
   features: string[];
   featuresLabel: string;
@@ -16,8 +16,7 @@ interface PricingCardProps {
 }
 
 export const PricingCard = ({
-  buttonHref,
-  buttonLabel,
+  action,
   description,
   features,
   featuresLabel,
@@ -39,15 +38,6 @@ export const PricingCard = ({
         </li>
       ))}
     </ul>
-    <Button
-      className={styles.button}
-      component="a"
-      fullWidth
-      href={buttonHref}
-      size="md"
-      variant={popularLabel ? "filled" : "default"}
-    >
-      {buttonLabel}
-    </Button>
+    <div className={styles.action}>{action}</div>
   </article>
 );

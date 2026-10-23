@@ -2,8 +2,8 @@ import { Container } from "@ui/Container";
 import { Text } from "@ui/Text";
 import { Title } from "@ui/Title";
 import { useTranslations } from "next-intl";
-import { NAVIGATION_NAMES } from "@shared/constants/navigation";
 import { POPULAR_PRICING, PRICING_FEATURES, PRICING_NAMES } from "./constants";
+import { PlanButton } from "./PlanButton";
 import { PricingCard } from "./PricingCard";
 import styles from "./styles.module.scss";
 
@@ -11,7 +11,7 @@ interface SectionPricingProps {
   id: string;
 }
 
-// Статичная секция без хуков — серверный компонент
+// Статичная секция без хуков — серверный компонент, клиентская только PlanButton
 export const SectionPricing = ({ id }: SectionPricingProps) => {
   const translate = useTranslations("Sections.Pricing");
 
@@ -26,8 +26,11 @@ export const SectionPricing = ({ id }: SectionPricingProps) => {
           {PRICING_NAMES.map((name) => (
             <li key={name}>
               <PricingCard
-                buttonHref={`#${NAVIGATION_NAMES.feedback}`}
-                buttonLabel={translate("button")}
+                action={
+                  <PlanButton isPrimary={name === POPULAR_PRICING} plan={name}>
+                    {translate("button")}
+                  </PlanButton>
+                }
                 description={translate(`list.${name}.description`)}
                 features={PRICING_FEATURES[name].map((feature) =>
                   translate(`features.${feature}`),
