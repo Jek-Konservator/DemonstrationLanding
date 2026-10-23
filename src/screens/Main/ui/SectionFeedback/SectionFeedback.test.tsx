@@ -21,8 +21,10 @@ describe("SectionFeedback", () => {
       screen.getByRole("heading", { level: 2, name: texts.title }),
     ).toBeInTheDocument();
     // В jsdom нет IntersectionObserver — форма загружается сразу
+    // Ленивый import() формы в vitest компилирует react-hook-form, yup и imask —
+    // под нагрузкой (покрытие, хук) дольше секунды по умолчанию
     expect(
-      await screen.findByRole("form", { name: texts.form }),
+      await screen.findByRole("form", { name: texts.form }, { timeout: 5000 }),
     ).toBeInTheDocument();
   });
 });

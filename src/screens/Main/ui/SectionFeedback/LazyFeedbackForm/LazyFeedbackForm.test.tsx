@@ -34,8 +34,14 @@ describe("LazyFeedbackForm", () => {
 
     act(() => triggerIntersection([{ isIntersecting: true }]));
 
+    // Ленивый import() формы в vitest компилирует react-hook-form, yup и imask —
+    // под нагрузкой (покрытие, хук) дольше секунды по умолчанию
     expect(
-      await screen.findByRole("form", { name: ru.Sections.Feedback.form }),
+      await screen.findByRole(
+        "form",
+        { name: ru.Sections.Feedback.form },
+        { timeout: 5000 },
+      ),
     ).toBeInTheDocument();
   });
 });
