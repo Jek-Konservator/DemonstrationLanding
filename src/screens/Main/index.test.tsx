@@ -6,7 +6,9 @@ import MainPage from ".";
 
 describe("MainPage", () => {
   it("рендерит секции по порядку", () => {
-    const { container } = renderWithProviders(<MainPage />);
+    const { container } = renderWithProviders(
+      <MainPage siteUrl="https://example.com" />,
+    );
 
     const ids = [...container.querySelectorAll("section")].map(
       (section) => section.id,
@@ -23,8 +25,18 @@ describe("MainPage", () => {
     ]);
   });
 
+  it("на странице есть JSON-LD", () => {
+    const { container } = renderWithProviders(
+      <MainPage siteUrl="https://example.com" />,
+    );
+
+    expect(
+      container.querySelector('script[type="application/ld+json"]'),
+    ).not.toBeNull();
+  });
+
   it("на странице один h1", () => {
-    renderWithProviders(<MainPage />);
+    renderWithProviders(<MainPage siteUrl="https://example.com" />);
 
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
   });

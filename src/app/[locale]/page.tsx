@@ -64,7 +64,7 @@ const Page = async ({ params }: PageProps) => {
 
   setRequestLocale(locale);
 
-  return <MainPage />;
+  return <MainPage siteUrl={CLIENT_ENV.NEXT_PUBLIC_SITE_URL} />;
 };
 
 export default Page;

@@ -7,11 +7,18 @@ import {
   SectionPricing,
   SectionProgram,
   SectionTeacher,
+  Seo,
 } from "./ui";
 
+interface MainPageProps {
+  // Адрес сайта для JSON-LD: env читает app, экран получает готовое значение
+  siteUrl: string;
+}
+
 // Экран главной страницы: порядок секций задаётся только здесь
-const MainPage = () => (
+const MainPage = ({ siteUrl }: MainPageProps) => (
   <main>
+    <Seo siteUrl={siteUrl} />
     <SectionMain id={NAVIGATION_NAMES.main} />
     <SectionAudience id={NAVIGATION_NAMES.audience} />
     <SectionProgram id={NAVIGATION_NAMES.program} />
