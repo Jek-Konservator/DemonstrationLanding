@@ -1,0 +1,89 @@
+.sectionTeacher {
+  padding-block: rem(64);
+  background-color: var(--mantine-color-gray-0);
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    padding-block: rem(112);
+  }
+
+  .title {
+    font-size: rem(28);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(44);
+    }
+  }
+
+  .content {
+    display: grid;
+    gap: rem(32);
+    margin-top: rem(40);
+
+    @include larger-than(map.get($breakpoints, "sm")) {
+      grid-template-columns: rem(240) 1fr;
+      align-items: center;
+    }
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      grid-template-columns: rem(320) 1fr;
+      gap: rem(64);
+    }
+  }
+
+  .avatar {
+    color: var(--mantine-color-violet-5);
+    overflow: hidden;
+    width: rem(200);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--mantine-color-violet-1);
+
+    @include larger-than(map.get($breakpoints, "sm")) {
+      width: 100%;
+    }
+  }
+
+  .illustration {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .name {
+    font-size: rem(24);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(32);
+    }
+  }
+
+  .role {
+    font-weight: 600;
+    color: var(--mantine-primary-color-filled);
+    margin-top: rem(8);
+  }
+
+  .description {
+    font-size: rem(18);
+    color: var(--mantine-color-dimmed);
+    max-width: rem(620);
+    margin-top: rem(16);
+  }
+
+  .facts {
+    @include unstyled-list;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(12);
+    margin-top: rem(24);
+  }
+
+  .fact {
+    font-weight: 500;
+    padding: rem(8) rem(16);
+    border: 1px solid var(--mantine-color-gray-2);
+    border-radius: var(--mantine-radius-xl);
+    background-color: var(--mantine-color-body);
+  }
+}

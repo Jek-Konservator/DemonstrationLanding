@@ -108,6 +108,19 @@
           "description": "Connect a neural network to your work tools and present a project built on a real task from your job."
         }
       }
+    },
+    "Teacher": {
+      "title": "Instructor",
+      "avatar": "Illustration: instructor portrait",
+      "name": "Maria Vetrova",
+      "role": "Head of AI at a product company",
+      "description": "Spent eight years as an analyst and for the last three has been rolling out neural networks in sales, marketing and support teams. In the course she shows only what she uses every day.",
+      "facts": {
+        "label": "Instructor experience",
+        "experience": "8 years in data analytics",
+        "companies": "Brought neural networks to 30+ teams",
+        "graduates": "Taught 1,200+ graduates"
+      }
     }
   }
 }
