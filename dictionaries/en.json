@@ -183,5 +183,11 @@
         }
       }
     }
+  },
+  "Errors": {
+    "required": "This field is required",
+    "phone": "Enter the full phone number",
+    "tooLong": "The value is too long",
+    "default": "Check the value"
   }
 }

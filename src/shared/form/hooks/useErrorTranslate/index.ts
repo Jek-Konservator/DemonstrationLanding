@@ -1,0 +1,1 @@
+export { useErrorTranslate } from "./useErrorTranslate";

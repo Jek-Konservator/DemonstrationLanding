@@ -1,0 +1,1 @@
+export { CheckboxAdapter } from "./CheckboxAdapter";
