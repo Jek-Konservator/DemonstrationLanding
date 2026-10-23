@@ -13,14 +13,14 @@
 
 **Состояние репозитория**
 
-- Работаем в ветке `dev`, последний коммит — `41d0491 feat(audience): секция «Для кого курс»`. Рабочая копия чистая, `npm run check` и `npm run build` зелёные, покрытие 100%.
+- Работаем в ветке `dev`, последние коммиты — `f92f515 feat(program): секция «Программа курса» с аккордеоном` и `d40f432 feat(teacher): секция «Преподаватель»`. Рабочая копия чистая, `npm run check` и `npm run build` зелёные, покрытие 100%.
 - `dev` никуда не запушен и не слит в `main`. На `main` — только каркас (`0e2c2b8`, в нём по ошибке старый `package.json` с ESLint 8 — исправлено в `dev` коммитом `c42940e`, в `main` попадёт при слиянии).
-- Готово: каркас, тема и UI Kit, Header / Footer / ScrollTop, первый экран (`SectionMain`), «Для кого курс» (`SectionAudience`), svgr.
+- Готово: каркас, тема и UI Kit (+ `Accordion`), Header / Footer / ScrollTop, первый экран (`SectionMain`), «Для кого курс» (`SectionAudience`), «Программа курса» (`SectionProgram`), «Преподаватель» (`SectionTeacher`), svgr.
 
-**Следующий шаг — этап 3b: «Программа курса» (аккордеон) и «Преподаватель»**
+**Следующий шаг — этап 3c: «Тарифы» и FAQ**
 
-- Открытый вопрос к Роману: откуда фото преподавателя — Unsplash (нейтральный портрет, пометить как стоковое), SVG-аватар или своя картинка. Без ответа секцию «Преподаватель» не начинать.
-- Для аккордеона добавить в UI Kit `Accordion` (реэкспорт Mantine, как Button), id секции — `NAVIGATION_NAMES.program`.
+- FAQ — на том же `@ui/Accordion` (умолчания `variant: "separated"`, `radius: "lg"` уже в теме), id — `NAVIGATION_NAMES.faq`.
+- Тарифы — id `NAVIGATION_NAMES.pricing`, кнопки тарифов ведут на `#feedback` (форма — этап 4).
 - Секции — по образцу `src/screens/Main/ui/SectionAudience/`: папка, `constants.ts`, `styles.module.scss`, тест (`section` с id, заголовок h2, элементы из констант), тексты в `Sections.<Name>` обоих словарей. Порядок секций — в `src/screens/Main/index.tsx` и его тесте.
 
 **Открытые хвосты**
@@ -45,7 +45,7 @@
   - [x] **2b. Layout** — Header (навигация по якорям, переключатель языка, бургер с Drawer), Footer, ScrollTop; тест совпадения ключей словарей.
 - [ ] **3. Секции** — первый экран, для кого курс, программа (аккордеон), преподаватель, тарифы, FAQ. По 1–2 секции за этап.
   - [x] **3a.** Первый экран (SectionMain), «Для кого курс» (SectionAudience), svgr, `useIntersectionObserver`.
-  - [ ] **3b.** Программа (аккордеон), преподаватель.
+  - [x] **3b.** Программа (аккордеон), преподаватель, `Accordion` в UI Kit.
   - [ ] **3c.** Тарифы, FAQ.
 - [ ] **4. Форма заявки** — схема yup, адаптеры полей, стор на createQuery, состояния Loading/Success/Error, route handler `/api/lead` с отправкой в Telegram, honeypot.
 - [ ] **5. SEO** — metadata, hreflang, sitemap.ts, robots.ts, OG-картинка, JSON-LD, Lighthouse ≥ 90.
@@ -69,3 +69,5 @@
 - `NAVIGATION_ITEMS` — `as const satisfies readonly NavigationName[]`: тип пропускает только пункты, у которых есть подпись в словаре.
 - SVG-компонент импортируется с суффиксом: `icon.svg?react` (тип `*.svg` Next объявил как `any`, перекрыть нельзя). `icon.svg?url` — `StaticImageData` для `next/image`. Типы — в `svg.d.ts` без импортов верхнего уровня.
 - Первый экран без фото и без анимации появления (LCP не ждёт JS), фон — CSS-градиент.
+- Accordion: `order={3}` оборачивает кнопки пунктов в `h3` (заголовок внутри `<button>` — невалидный HTML). Accordion не принимает `ref` — `useIntersectionObserver` вешаем на обёртку `div`.
+- Преподаватель — вымышленный, вместо фото SVG-иллюстрация (`currentColor`, цвет из SCSS, `role="img"` + `aria-label` из словаря). Секция статичная — серверный компонент без анимации появления.
