@@ -153,6 +153,35 @@
           "price": "$570"
         }
       }
+    },
+    "Faq": {
+      "title": "FAQ",
+      "list": {
+        "experience": {
+          "question": "Do I need coding experience?",
+          "answer": "No. We work in chatbots and familiar office tools, no code required."
+        },
+        "time": {
+          "question": "How much time does it take per week?",
+          "answer": "4–6 hours: about an hour of lessons, the rest goes to assignments."
+        },
+        "tools": {
+          "question": "Do I need paid AI subscriptions?",
+          "answer": "Free versions are enough for the course. Where a paid version is clearly better, we show you how to compare."
+        },
+        "access": {
+          "question": "How long do I keep access to the materials?",
+          "answer": "One year from the start of the course, including any lesson updates."
+        },
+        "certificate": {
+          "question": "Will I get a certificate?",
+          "answer": "Yes, on the With a mentor and Personal plans — after you present your final project."
+        },
+        "refund": {
+          "question": "Can I get a refund?",
+          "answer": "Yes, a full refund within 14 days of the course start, no questions asked."
+        }
+      }
     }
   }
 }

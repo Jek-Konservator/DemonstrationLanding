@@ -1,6 +1,7 @@
 import { NAVIGATION_NAMES } from "@shared/constants/navigation";
 import {
   SectionAudience,
+  SectionFaq,
   SectionMain,
   SectionPricing,
   SectionProgram,
@@ -15,6 +16,7 @@ const MainPage = () => (
     <SectionProgram id={NAVIGATION_NAMES.program} />
     <SectionTeacher id={NAVIGATION_NAMES.teacher} />
     <SectionPricing id={NAVIGATION_NAMES.pricing} />
+    <SectionFaq id={NAVIGATION_NAMES.faq} />
   </main>
 );
 

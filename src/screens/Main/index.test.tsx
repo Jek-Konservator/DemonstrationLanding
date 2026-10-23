@@ -18,6 +18,7 @@ describe("MainPage", () => {
       NAVIGATION_NAMES.program,
       NAVIGATION_NAMES.teacher,
       NAVIGATION_NAMES.pricing,
+      NAVIGATION_NAMES.faq,
     ]);
   });
 
