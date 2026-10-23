@@ -2,6 +2,7 @@ import { NAVIGATION_NAMES } from "@shared/constants/navigation";
 import {
   SectionAudience,
   SectionFaq,
+  SectionFeedback,
   SectionMain,
   SectionPricing,
   SectionProgram,
@@ -17,6 +18,7 @@ const MainPage = () => (
     <SectionTeacher id={NAVIGATION_NAMES.teacher} />
     <SectionPricing id={NAVIGATION_NAMES.pricing} />
     <SectionFaq id={NAVIGATION_NAMES.faq} />
+    <SectionFeedback id={NAVIGATION_NAMES.feedback} />
   </main>
 );
 

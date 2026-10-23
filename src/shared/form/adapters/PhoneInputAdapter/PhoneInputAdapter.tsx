@@ -12,6 +12,8 @@ interface PhoneInputAdapterProps<T extends FieldValues> extends Omit<
   InputBaseProps,
   "error"
 > {
+  // InputBase полиморфный: атрибуты самого поля в его пропсах не описаны
+  autoComplete?: string;
   control: Control<T>;
   mask: string;
   name: Path<T>;

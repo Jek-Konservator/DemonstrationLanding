@@ -31,7 +31,8 @@ export const SelectAdapter = <T extends FieldValues>({
       onBlur={field.onBlur}
       onChange={field.onChange}
       ref={field.ref}
-      value={field.value}
+      // Пока ничего не выбрано — null: Select остаётся контролируемым
+      value={field.value ?? null}
     />
   );
 };

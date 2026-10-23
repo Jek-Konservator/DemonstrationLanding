@@ -1,5 +1,6 @@
 export { SectionAudience } from "./SectionAudience";
 export { SectionFaq } from "./SectionFaq";
+export { SectionFeedback } from "./SectionFeedback";
 export { SectionMain } from "./SectionMain";
 export { SectionPricing } from "./SectionPricing";
 export { SectionProgram } from "./SectionProgram";

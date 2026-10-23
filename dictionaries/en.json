@@ -182,6 +182,37 @@
           "answer": "Yes, a full refund within 14 days of the course start, no questions asked."
         }
       }
+    },
+    "Feedback": {
+      "title": "Enroll in the course",
+      "description": "Leave your contacts — a mentor will call you within a day, answer your questions and help you choose a plan.",
+      "form": "Course application",
+      "fields": {
+        "name": {
+          "label": "Name",
+          "placeholder": "How should we address you"
+        },
+        "phone": {
+          "label": "Phone",
+          "placeholder": "+1 (___) ___-____"
+        },
+        "plan": {
+          "label": "Plan",
+          "placeholder": "Choose a plan"
+        },
+        "consent": "I agree to the processing of my personal data"
+      },
+      "submit": "Send application",
+      "success": {
+        "title": "Application sent",
+        "text": "A mentor will contact you within a day.",
+        "button": "Send another one"
+      },
+      "error": {
+        "title": "Could not send",
+        "text": "Check your connection and try again.",
+        "button": "Try again"
+      }
     }
   },
   "Errors": {

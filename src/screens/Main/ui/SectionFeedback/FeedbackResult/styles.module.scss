@@ -1,0 +1,70 @@
+.feedbackResult {
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: rem(24);
+  border-radius: inherit;
+  background-color: var(--mantine-color-body);
+  inset: 0;
+
+  // Галочка успеха / крестик ошибки — CSS, без иконок
+  .icon {
+    position: relative;
+    width: rem(56);
+    height: rem(56);
+    border-radius: 50%;
+    background-color: var(--mantine-color-teal-0);
+
+    &::before {
+      position: absolute;
+      top: rem(19);
+      left: rem(18);
+      width: rem(20);
+      height: rem(11);
+      content: "";
+      transform: rotate(-45deg);
+      border-bottom: 3px solid var(--mantine-color-teal-7);
+      border-left: 3px solid var(--mantine-color-teal-7);
+    }
+  }
+
+  &.isError .icon {
+    background-color: var(--mantine-color-red-0);
+
+    &::before,
+    &::after {
+      top: rem(26);
+      left: rem(16);
+      width: rem(24);
+      height: 0;
+      content: "";
+      transform: rotate(45deg);
+      border: 0;
+      border-top: 3px solid var(--mantine-color-red-7);
+    }
+
+    &::after {
+      position: absolute;
+      transform: rotate(-45deg);
+    }
+  }
+
+  .title {
+    font-size: rem(22);
+    margin-top: rem(20);
+  }
+
+  .text {
+    color: var(--mantine-color-dimmed);
+    max-width: rem(320);
+    margin-top: rem(8);
+  }
+
+  .button {
+    margin-top: rem(24);
+  }
+}

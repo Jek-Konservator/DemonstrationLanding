@@ -1,0 +1,40 @@
+.sectionFeedback {
+  padding-block: rem(64);
+  background:
+    radial-gradient(
+      ellipse at bottom left,
+      var(--mantine-color-violet-1),
+      transparent 60%
+    ),
+    var(--mantine-color-body);
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    padding-block: rem(112);
+  }
+
+  .content {
+    display: grid;
+    gap: rem(32);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      grid-template-columns: 1fr rem(480);
+      align-items: center;
+      gap: rem(64);
+    }
+  }
+
+  .title {
+    font-size: rem(28);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(44);
+    }
+  }
+
+  .description {
+    font-size: rem(18);
+    color: var(--mantine-color-dimmed);
+    max-width: rem(480);
+    margin-top: rem(12);
+  }
+}
