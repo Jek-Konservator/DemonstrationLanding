@@ -13,22 +13,23 @@
 
 **Состояние репозитория**
 
-- Работаем в ветке `dev`, последний коммит — `c3c83fa feat(feedback): секция с формой заявки`. Рабочая копия чистая, `npm run check` и `npm run build` зелёные, покрытие 100%.
+- Работаем в ветке `dev`, последний коммит — `d641a59 test(feedback): таймаут на ленивую загрузку формы`. Рабочая копия чистая, `npm run check` и `npm run build` зелёные, покрытие 100% (изредка v8 показывает 99.9% на `FeedbackForm.tsx` — артефакт двойной загрузки модуля, порог 80%).
+- Для `npm run build` локально нужен `.env.local` (`cp .env.example .env.local`): без `NEXT_PUBLIC_SITE_URL` сборка падает — так и задумано.
 - `dev` никуда не запушен и не слит в `main`. На `main` — только каркас (`0e2c2b8`, в нём по ошибке старый `package.json` с ESLint 8 — исправлено в `dev` коммитом `c42940e`, в `main` попадёт при слиянии).
-- Готово: каркас, тема и UI Kit, Header / Footer / ScrollTop, svgr, все секции этапа 3 и форма заявки (этап 4): env (`SERVER_ENV` / `CLIENT_ENV`), `shared/form` (валидаторы, `useErrorTranslate`, адаптеры), `entities/Lead` (схема, `createLeadQuery`, `planSelected`), `services/request` и `services/telegram`, `/api/lead`, `SectionFeedback`.
+- Готово: этапы 1–5 — каркас, тема и UI Kit, Layout, все секции, форма заявки с `/api/lead` и Telegram (демо-режим без ключей), SEO (canonical, hreflang, Open Graph, OG-картинки, sitemap, robots, JSON-LD, иконка), облегчение бандла: First Load JS главной — 148 kB.
 
-**Следующий шаг — этап 5: SEO и производительность**
+**Следующий шаг — этап 6: финал**
 
-- `metadata` с `openGraph` и `alternates` (canonical, hreflang) — адрес сайта из `CLIENT_ENV.NEXT_PUBLIC_SITE_URL`; `sitemap.ts`, `robots.ts`, OG-картинка 1200×630, JSON-LD.
-- Вес страницы (см. хвосты): bundle-analyzer, форма и мобильное меню через `dynamic`. Затем Lighthouse (мобильный) ≥ 90.
-- Форму руками в браузере ещё не отправляли (только тесты и `curl` по `/api/lead`) — проверить перед этапом 6.
+- Отправить форму руками в браузере (`npm run dev`): ошибки пустых полей, выбор тарифа кнопкой в «Тарифах», «Заявка отправлена» в демо-режиме. До сих пор — только тесты и `curl` по `/api/lead`.
+- Деплой на Vercel: `NEXT_PUBLIC_SITE_URL` = адрес деплоя (иначе сборка упадёт); ключи Telegram — по желанию. Node — из `.nvmrc`.
+- Lighthouse (мобильный) — перемерить на Vercel. Локально мешает Kaspersky (встраивает скрипт по HTTP и снимает gzip): Performance 89–90, Accessibility 100, Best Practices 82, SEO 92 (canonical на тестовый домен). Если на Vercel Performance < 90 — подключать CSS Mantine по компонентам вместо `styles.css` (30 КБ блокирующего CSS).
+- README со скриншотами и бейджем CI, материалы для Kwork.
 
 **Открытые хвосты**
 
 - Гайд (`docs/LANDING_GUIDE.md`) расходится с кодом в двух местах — предложить Роману `docs`-коммит:
   - раздел 4: пример `clsx({ [styles.isVisible]: isVisible })` не компилируется с `noUncheckedIndexedAccess`, пишем `clsx(styles.a, isX && styles.isX)`;
   - раздел 7: SVG-компонент импортируется как `icon.svg?react`, а `?url` даёт `StaticImageData`, а не строку.
-- First Load JS главной — 348 kB: 270 kB до формы (Drawer в шапке тянет Modal/FocusTrap/Portal) + react-hook-form, yup, imask, effector, farfetched, axios, Select. Разобрать на этапе 5: bundle-analyzer, `FeedbackForm` и мобильное меню через `dynamic`.
 
 **Как работаем с git (важно)**
 
@@ -47,8 +48,8 @@
   - [x] **3b.** Программа (аккордеон), преподаватель, `Accordion` в UI Kit.
   - [x] **3c.** Тарифы (`PricingCard`), FAQ.
 - [x] **4. Форма заявки** — схема yup, адаптеры полей, стор на createQuery, состояния Loading/Success/Error, route handler `/api/lead` с отправкой в Telegram, honeypot.
-- [ ] **5. SEO** — metadata, hreflang, sitemap.ts, robots.ts, OG-картинка, JSON-LD, Lighthouse ≥ 90.
-      Плюс вес страницы — см. «Открытые хвосты».
+- [x] **5. SEO** — metadata, hreflang, sitemap.ts, robots.ts, OG-картинка, JSON-LD, Lighthouse ≥ 90.
+      Плюс вес страницы: 347 → 148 kB (реэкспорты UI Kit, ленивая форма). Lighthouse перемерить на Vercel.
 - [ ] **6. Финал** — README со скриншотами и бейджем CI, деплой на Vercel, скриншоты и видео для Kwork.
 
 ## Принятые решения
@@ -77,3 +78,9 @@
 - Сообщение в Telegram — всегда на русском, подписи полей в коде (`formatLeadMessage`): это служебный текст владельцу, не текст сайта. Без `parse_mode` — разметка из заявки не интерпретируется.
 - Кнопка тарифа → событие effector `planSelected` → форма подставляет тариф (`watch` в `useEffect` с отпиской). `PlanButton` — клиентская, `PricingCard` получает её через `action`, секция тарифов остаётся серверной.
 - Состояния формы — поверх неё: `LoadingOverlay` и `FeedbackResult` (успех — `role="status"`, ошибка — `role="alert"`, «Попробовать снова» сохраняет введённое). `onSubmit={(event) => void handleSubmit(onSubmit)(event)}` — из-за `no-misused-promises`.
+- Метаданные: `metadataBase` из `CLIENT_ENV`, canonical и hreflang (`x-default` → `/ru`) через `shared/config/seo`. Sitemap и robots — функции там же, `app/sitemap.ts` и `app/robots.ts` — обёртки. В CI адрес сайта задан в шаге сборки.
+- OG-картинка — `next/og` для каждого языка, статически (`generateStaticParams`). Шрифт — Manrope `.woff` из `@fontsource/manrope` в `OgImage/assets` (OFL): дефолтный шрифт `next/og` без кириллицы. Латиница и кириллица — разные имена шрифта: с одним именем Satori берёт только первый файл. Цвета — `THEME_COLORS` из палитры Mantine; `@ui/theme/colors` импортируется напрямую, потому что `theme.ts` (Component.extend) на сервере не работает.
+- JSON-LD — `Course` с провайдером `Organization` (адреса и контактов нет). `siteUrl` передаётся в `MainPage` из `page.tsx`: env читает только `app`. Без `offers` — цены в словаре строками.
+- UI Kit: `import { X } from "@mantine/core"; export { X };`, а не `export { X } from` — иначе `optimizePackageImports` не срабатывает и в бандл попадает весь Mantine (было +136 kB).
+- Форма грузится `next/dynamic` (`ssr: false`) по видимости секции (`rootMargin: 600px`), место под неё держит `min-height`. Тариф до загрузки формы — в `$selectedPlan`. `PlanButton` импортирует `@entities/Lead/model/plan`, а не индекс сущности. Ленивый Drawer в шапке пробовали — выигрыша нет, откатили.
+- `--mantine-color-dimmed` — `gray.7` через `cssVariablesResolver` (у `gray.6` контраст 3.3). У ссылок языков `aria-label` начинается с видимого текста: «RU — Русский».
