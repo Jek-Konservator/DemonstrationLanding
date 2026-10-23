@@ -12,7 +12,11 @@ describe("MainPage", () => {
       (section) => section.id,
     );
 
-    expect(ids).toEqual([NAVIGATION_NAMES.main, NAVIGATION_NAMES.audience]);
+    expect(ids).toEqual([
+      NAVIGATION_NAMES.main,
+      NAVIGATION_NAMES.audience,
+      NAVIGATION_NAMES.program,
+    ]);
   });
 
   it("на странице один h1", () => {

@@ -77,6 +77,37 @@
           "description": "Automated sales and support, quick drafts of documents."
         }
       }
+    },
+    "Program": {
+      "title": "Course curriculum",
+      "description": "Six weeks, each with short lessons and 4 hands-on assignments reviewed by a mentor.",
+      "week": "Week {number}",
+      "list": {
+        "basics": {
+          "name": "How neural networks work",
+          "description": "What language models can and cannot do, how to pick a tool for the task and keep sensitive data out of the chat."
+        },
+        "prompts": {
+          "name": "Prompts for work",
+          "description": "Prompt structure, roles and examples, follow-up questions. You build your own library of templates."
+        },
+        "texts": {
+          "name": "Texts and documents",
+          "description": "Emails, reports, meeting notes and editing: from a rough draft to a finished document in your style."
+        },
+        "data": {
+          "name": "Spreadsheets and data",
+          "description": "Working with exports, formulas, spotting patterns and clear conclusions for your manager."
+        },
+        "visuals": {
+          "name": "Presentations and visuals",
+          "description": "Presentation structure, generating images and diagrams, styling slides with your company template."
+        },
+        "automation": {
+          "name": "Automation and final project",
+          "description": "Connect a neural network to your work tools and present a project built on a real task from your job."
+        }
+      }
     }
   }
 }

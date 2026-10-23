@@ -1,4 +1,10 @@
-import { Button, Container, createTheme, Title } from "@mantine/core";
+import {
+  Accordion,
+  Button,
+  Container,
+  createTheme,
+  Title,
+} from "@mantine/core";
 
 // Совпадают с $breakpoints в theme.scss — проверяется тестом
 export const BREAKPOINTS = {
@@ -20,6 +26,9 @@ export const theme = createTheme({
   breakpoints: BREAKPOINTS,
   defaultRadius: "md",
   components: {
+    Accordion: Accordion.extend({
+      defaultProps: { variant: "separated", radius: "lg" },
+    }),
     Button: Button.extend({
       defaultProps: { radius: "xl" },
     }),
