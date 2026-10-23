@@ -121,6 +121,38 @@
         "companies": "Brought neural networks to 30+ teams",
         "graduates": "Taught 1,200+ graduates"
       }
+    },
+    "Pricing": {
+      "title": "Pricing",
+      "description": "Every plan has the same curriculum — only the support differs. Instalments are available.",
+      "button": "Apply",
+      "popular": "Popular",
+      "featuresLabel": "What the {name} plan includes",
+      "features": {
+        "lessons": "All lessons and course materials",
+        "tasks": "24 hands-on assignments",
+        "chat": "Community chat",
+        "review": "Assignments reviewed by a mentor",
+        "certificate": "Certificate of completion",
+        "consultations": "3 one-on-one sessions with the instructor"
+      },
+      "list": {
+        "basic": {
+          "name": "Self-paced",
+          "description": "For those who prefer to figure things out alone.",
+          "price": "$190"
+        },
+        "standard": {
+          "name": "With a mentor",
+          "description": "Feedback on every assignment.",
+          "price": "$320"
+        },
+        "premium": {
+          "name": "Personal",
+          "description": "Your own work tasks reviewed one on one.",
+          "price": "$570"
+        }
+      }
     }
   }
 }
