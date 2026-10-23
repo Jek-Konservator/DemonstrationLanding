@@ -14,6 +14,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { PLAN_NAMES } from "@shared/constants/plans";
 import {
+  $selectedPlan,
   createLeadQuery,
   leadSchema,
   planSelected,
@@ -29,10 +30,11 @@ export const FeedbackForm = () => {
   const translate = useTranslations("Sections.Feedback");
   const translatePricing = useTranslations("Sections.Pricing");
   const locale = useLocale();
-  const { failed, pending, reset, start, succeeded } = useUnit({
+  const { failed, pending, reset, selectedPlan, start, succeeded } = useUnit({
     failed: createLeadQuery.$failed,
     pending: createLeadQuery.$pending,
     reset: createLeadQuery.reset,
+    selectedPlan: $selectedPlan,
     start: createLeadQuery.start,
     succeeded: createLeadQuery.$succeeded,
   });
@@ -43,7 +45,8 @@ export const FeedbackForm = () => {
     reset: resetForm,
     setValue,
   } = useForm<Lead>({
-    defaultValues: DEFAULT_VALUES,
+    // Тариф могли выбрать в «Тарифах» ещё до загрузки формы
+    defaultValues: { ...DEFAULT_VALUES, plan: selectedPlan ?? undefined },
     resolver: yupResolver(leadSchema),
   });
 

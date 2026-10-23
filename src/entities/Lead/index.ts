@@ -1,3 +1,3 @@
-export { planSelected } from "./model/plan";
+export { $selectedPlan, planSelected } from "./model/plan";
 export { createLeadQuery } from "./model/store";
 export { leadSchema, LEAD_NAME_MAX_LENGTH, type Lead } from "./model/schema";

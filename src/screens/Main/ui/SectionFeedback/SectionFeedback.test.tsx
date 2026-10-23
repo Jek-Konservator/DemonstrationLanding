@@ -8,7 +8,7 @@ import ru from "../../../../../dictionaries/ru.json";
 const texts = ru.Sections.Feedback;
 
 describe("SectionFeedback", () => {
-  it("рендерит секцию с id, заголовком h2 и формой", () => {
+  it("рендерит секцию с id, заголовком h2 и формой", async () => {
     const { container } = renderWithProviders(
       <SectionFeedback id={NAVIGATION_NAMES.feedback} />,
     );
@@ -20,6 +20,9 @@ describe("SectionFeedback", () => {
     expect(
       screen.getByRole("heading", { level: 2, name: texts.title }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("form", { name: texts.form })).toBeInTheDocument();
+    // В jsdom нет IntersectionObserver — форма загружается сразу
+    expect(
+      await screen.findByRole("form", { name: texts.form }),
+    ).toBeInTheDocument();
   });
 });

@@ -5,7 +5,8 @@ import { Button } from "@ui/Button";
 import { useUnit } from "effector-react";
 import { NAVIGATION_NAMES } from "@shared/constants/navigation";
 import type { PlanName } from "@shared/constants/plans";
-import { planSelected } from "@entities/Lead";
+// Не из @entities/Lead: индекс тянет стор заявки (farfetched, axios, yup) в основной бандл
+import { planSelected } from "@entities/Lead/model/plan";
 
 interface PlanButtonProps {
   children: ReactNode;

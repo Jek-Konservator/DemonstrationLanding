@@ -2,14 +2,14 @@ import { Container } from "@ui/Container";
 import { Text } from "@ui/Text";
 import { Title } from "@ui/Title";
 import { useTranslations } from "next-intl";
-import { FeedbackForm } from "./FeedbackForm";
+import { LazyFeedbackForm } from "./LazyFeedbackForm";
 import styles from "./styles.module.scss";
 
 interface SectionFeedbackProps {
   id: string;
 }
 
-// Серверная обёртка: клиентская только сама форма
+// Серверная обёртка: форма клиентская и грузится лениво
 export const SectionFeedback = ({ id }: SectionFeedbackProps) => {
   const translate = useTranslations("Sections.Feedback");
 
@@ -25,7 +25,7 @@ export const SectionFeedback = ({ id }: SectionFeedbackProps) => {
               {translate("description")}
             </Text>
           </div>
-          <FeedbackForm />
+          <LazyFeedbackForm />
         </div>
       </Container>
     </section>

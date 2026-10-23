@@ -125,4 +125,15 @@ describe("FeedbackForm", () => {
       screen.getByRole("textbox", { name: texts.fields.plan.label }),
     ).toHaveValue(ru.Sections.Pricing.list.premium.name);
   });
+
+  // Последним: выбранный тариф остаётся в сторе и подставился бы в тесты выше
+  it("тариф выбрали до загрузки формы — он уже подставлен", () => {
+    planSelected("basic");
+
+    renderWithProviders(<FeedbackForm />);
+
+    expect(
+      screen.getByRole("textbox", { name: texts.fields.plan.label }),
+    ).toHaveValue(ru.Sections.Pricing.list.basic.name);
+  });
 });
