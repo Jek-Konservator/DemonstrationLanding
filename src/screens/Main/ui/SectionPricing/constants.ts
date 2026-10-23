@@ -1,7 +1,9 @@
-// Тарифы — ключи Sections.Pricing.list.<name>
-export const PRICING_NAMES = ["basic", "standard", "premium"] as const;
+import { PLAN_NAMES, type PlanName } from "@shared/constants/plans";
 
-export type PricingName = (typeof PRICING_NAMES)[number];
+// Тарифы — ключи Sections.Pricing.list.<name>; список общий с полем тарифа в заявке
+export const PRICING_NAMES = PLAN_NAMES;
+
+export type PricingName = PlanName;
 
 // Что входит в тарифы — ключи Sections.Pricing.features.<name>
 export const FEATURE_NAMES = [
