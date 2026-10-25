@@ -1,11 +1,13 @@
 "use client";
 
 import { Accordion } from "@ui/Accordion";
+import { Button } from "@ui/Button";
 import { Container } from "@ui/Container";
 import { Text } from "@ui/Text";
 import { Title } from "@ui/Title";
 import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
+import { NAVIGATION_NAMES } from "@shared/constants/navigation";
 import { useIntersectionObserver } from "@shared/hooks/useIntersectionObserver";
 import { FAQ_NAMES } from "./constants";
 import styles from "./styles.module.scss";
@@ -28,7 +30,7 @@ export const SectionFaq = ({ id }: SectionFaqProps) => {
         </Title>
         {/* Accordion не принимает ref — наблюдаем за обёрткой */}
         <div
-          className={clsx(styles.faq, isVisible && styles.isVisible)}
+          className={clsx(styles.content, isVisible && styles.isVisible)}
           ref={ref}
         >
           {/* order — каждый вопрос оборачивается в h3 */}
@@ -46,6 +48,23 @@ export const SectionFaq = ({ id }: SectionFaqProps) => {
               </Accordion.Item>
             ))}
           </Accordion>
+          <aside className={styles.contact}>
+            <Title className={styles.contactTitle} order={3}>
+              {translate("contact.title")}
+            </Title>
+            <Text className={styles.contactText}>
+              {translate("contact.text")}
+            </Text>
+            <Button
+              component="a"
+              fullWidth
+              href={`#${NAVIGATION_NAMES.feedback}`}
+              size="md"
+              variant="default"
+            >
+              {translate("contact.button")}
+            </Button>
+          </aside>
         </div>
       </Container>
     </section>

@@ -7,3 +7,12 @@ export const PROGRAM_NAMES = [
   "visuals",
   "automation",
 ] as const;
+
+// Факты о формате — ключи Sections.Program.format.list.<name>
+export const FORMAT_NAMES = [
+  "start",
+  "lessons",
+  "workload",
+  "access",
+  "result",
+] as const;

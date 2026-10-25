@@ -14,11 +14,39 @@
     }
   }
 
-  .faq {
+  // Телефон и планшет — карточка «Не нашли ответ?» под вопросами, десктоп — справа
+  .content {
     @include fadeUp;
 
-    max-width: rem(860);
+    display: grid;
+    gap: rem(32);
     margin-top: rem(40);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      grid-template-columns: minmax(0, 1fr) rem(320);
+      align-items: start;
+      gap: rem(40);
+    }
+
+    @include larger-than(map.get($breakpoints, "lg")) {
+      grid-template-columns: minmax(0, 1fr) rem(360);
+      gap: rem(48);
+    }
+  }
+
+  .contact {
+    padding: rem(28) rem(24);
+    border-radius: var(--mantine-radius-lg);
+    background-color: var(--mantine-color-body);
+  }
+
+  .contactTitle {
+    font-size: rem(20);
+  }
+
+  .contactText {
+    color: var(--mantine-color-dimmed);
+    margin: rem(12) 0 rem(24);
   }
 
   // Фон секции серый — пункты делаем белыми, иначе сливаются

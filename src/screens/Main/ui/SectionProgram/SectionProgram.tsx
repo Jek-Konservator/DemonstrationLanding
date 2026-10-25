@@ -1,13 +1,15 @@
 "use client";
 
 import { Accordion } from "@ui/Accordion";
+import { Button } from "@ui/Button";
 import { Container } from "@ui/Container";
 import { Text } from "@ui/Text";
 import { Title } from "@ui/Title";
 import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
+import { NAVIGATION_NAMES } from "@shared/constants/navigation";
 import { useIntersectionObserver } from "@shared/hooks/useIntersectionObserver";
-import { PROGRAM_NAMES } from "./constants";
+import { FORMAT_NAMES, PROGRAM_NAMES } from "./constants";
 import styles from "./styles.module.scss";
 
 interface SectionProgramProps {
@@ -29,7 +31,7 @@ export const SectionProgram = ({ id }: SectionProgramProps) => {
         <Text className={styles.description}>{translate("description")}</Text>
         {/* Accordion не принимает ref — наблюдаем за обёрткой */}
         <div
-          className={clsx(styles.program, isVisible && styles.isVisible)}
+          className={clsx(styles.content, isVisible && styles.isVisible)}
           ref={ref}
         >
           {/* order — каждая кнопка модуля оборачивается в h3 */}
@@ -52,6 +54,31 @@ export const SectionProgram = ({ id }: SectionProgramProps) => {
               </Accordion.Item>
             ))}
           </Accordion>
+          <aside className={styles.format}>
+            <Title className={styles.formatTitle} order={3}>
+              {translate("format.title")}
+            </Title>
+            <dl className={styles.facts}>
+              {FORMAT_NAMES.map((name) => (
+                <div className={styles.fact} key={name}>
+                  <dt className={styles.factLabel}>
+                    {translate(`format.list.${name}.label`)}
+                  </dt>
+                  <dd className={styles.factValue}>
+                    {translate(`format.list.${name}.value`)}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <Button
+              component="a"
+              fullWidth
+              href={`#${NAVIGATION_NAMES.feedback}`}
+              size="md"
+            >
+              {translate("format.button")}
+            </Button>
+          </aside>
         </div>
       </Container>
     </section>

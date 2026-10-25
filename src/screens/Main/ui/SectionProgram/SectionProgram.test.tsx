@@ -5,7 +5,7 @@ import { NAVIGATION_NAMES } from "@shared/constants/navigation";
 import { renderWithProviders } from "@shared/testing";
 import { SectionProgram } from ".";
 import ru from "../../../../../dictionaries/ru.json";
-import { PROGRAM_NAMES } from "./constants";
+import { FORMAT_NAMES, PROGRAM_NAMES } from "./constants";
 
 const texts = ru.Sections.Program;
 
@@ -30,9 +30,11 @@ describe("SectionProgram", () => {
   it("рендерит модули по порядку заголовками h3", () => {
     renderWithProviders(<SectionProgram id={NAVIGATION_NAMES.program} />);
 
+    // Последний h3 — заголовок карточки формата, он проверяется ниже
     const headings = screen
       .getAllByRole("heading", { level: 3 })
-      .map((heading) => heading.textContent);
+      .map((heading) => heading.textContent)
+      .slice(0, -1);
 
     expect(headings).toEqual(
       PROGRAM_NAMES.map(
@@ -53,5 +55,26 @@ describe("SectionProgram", () => {
 
     expect(getControl("basics")).toHaveAttribute("aria-expanded", "false");
     expect(getControl("prompts")).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("рендерит формат обучения и кнопку записи", () => {
+    renderWithProviders(<SectionProgram id={NAVIGATION_NAMES.program} />);
+
+    expect(
+      screen.getByRole("heading", { level: 3, name: texts.format.title }),
+    ).toBeInTheDocument();
+
+    FORMAT_NAMES.forEach((name) => {
+      expect(
+        screen.getByText(texts.format.list[name].label),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(texts.format.list[name].value),
+      ).toBeInTheDocument();
+    });
+
+    expect(
+      screen.getByRole("link", { name: texts.format.button }),
+    ).toHaveAttribute("href", `#${NAVIGATION_NAMES.feedback}`);
   });
 });

@@ -122,6 +122,32 @@
           "name": "Automation and final project",
           "description": "Connect a neural network to your work tools and present a project built on a real task from your job."
         }
+      },
+      "format": {
+        "title": "Course format",
+        "list": {
+          "start": {
+            "label": "Start",
+            "value": "Every month"
+          },
+          "lessons": {
+            "label": "Lessons",
+            "value": "15–20 minute videos"
+          },
+          "workload": {
+            "label": "Workload",
+            "value": "4–6 hours a week"
+          },
+          "access": {
+            "label": "Access",
+            "value": "One year from the start"
+          },
+          "result": {
+            "label": "Outcome",
+            "value": "Your own project and a certificate"
+          }
+        },
+        "button": "Enroll in the course"
       }
     },
     "Teacher": {
@@ -235,6 +261,11 @@
           "question": "Can I get a refund?",
           "answer": "Yes, a full refund within 14 days of the course start, no questions asked."
         }
+      },
+      "contact": {
+        "title": "Didn't find an answer?",
+        "text": "Leave a request — a mentor will call you and answer any questions about the course.",
+        "button": "Ask a question"
       }
     },
     "Feedback": {
