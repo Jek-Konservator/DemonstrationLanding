@@ -1,0 +1,258 @@
+// Сценарий: вопрос → «печатает» → ответ по строкам → плашка с итогом
+$question-delay: 0.3s;
+$typing-delay: 0.9s;
+$typing-duration: 1.4s;
+$answer-delay: 2.3s;
+$item-step: 0.2s;
+$saved-delay: 3.3s;
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(rem(8));
+  }
+}
+
+// Индикатор «печатает»: появляется и исчезает, пока готовится ответ
+@keyframes typing {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  10%,
+  85% {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  to {
+    transform: translateY(rem(-4));
+  }
+}
+
+// Появление с задержкой; без анимаций элемент виден сразу
+@mixin appear($delay) {
+  animation: appear 0.5s ease $delay both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.heroChat {
+  position: relative;
+  padding-bottom: rem(24);
+
+  .window {
+    overflow: hidden;
+    box-shadow: var(--mantine-shadow-xl);
+    border: 1px solid var(--mantine-color-gray-2);
+    border-radius: var(--mantine-radius-lg);
+    background-color: var(--mantine-color-body);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: rem(10);
+    padding: rem(14) rem(16);
+    border-bottom: 1px solid var(--mantine-color-gray-2);
+  }
+
+  .avatar {
+    color: var(--mantine-color-white);
+    display: inline-flex;
+    padding: rem(7);
+    border-radius: 50%;
+    background-image: linear-gradient(
+      135deg,
+      var(--mantine-color-violet-5),
+      var(--mantine-color-indigo-7)
+    );
+  }
+
+  .avatarIcon {
+    width: rem(18);
+    height: rem(18);
+  }
+
+  .name {
+    font-weight: 700;
+  }
+
+  .status {
+    font-size: rem(13);
+    color: var(--mantine-color-dimmed);
+    display: inline-flex;
+    align-items: center;
+    gap: rem(6);
+    margin-left: auto;
+
+    &::before {
+      width: rem(8);
+      height: rem(8);
+      content: "";
+      border-radius: 50%;
+      background-color: var(--mantine-color-teal-6);
+    }
+  }
+
+  .messages {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16);
+    padding: rem(16);
+
+    // Снизу место под плашку с итогом — она заходит на окно
+    padding-bottom: rem(32);
+
+    @include larger-than(map.get($breakpoints, "sm")) {
+      padding: rem(20);
+      padding-bottom: rem(36);
+    }
+  }
+
+  .question {
+    @include appear($question-delay);
+
+    color: var(--mantine-color-white);
+    align-self: flex-end;
+    max-width: 88%;
+    padding: rem(12) rem(14);
+    border-radius: var(--mantine-radius-lg) var(--mantine-radius-lg) rem(4)
+      var(--mantine-radius-lg);
+    background-color: var(--mantine-primary-color-filled);
+  }
+
+  .questionText {
+    font-size: rem(15);
+    margin: 0;
+  }
+
+  .file {
+    font-size: rem(13);
+    display: inline-flex;
+    align-items: center;
+    gap: rem(6);
+    margin-top: rem(10);
+    padding: rem(4) rem(10);
+    border-radius: var(--mantine-radius-sm);
+    background-color: var(--mantine-color-violet-7);
+  }
+
+  .fileIcon {
+    width: rem(16);
+    height: rem(16);
+  }
+
+  // Индикатор лежит поверх места ответа — высота блока не прыгает
+  .reply {
+    position: relative;
+  }
+
+  .typing {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    gap: rem(4);
+    padding: rem(14);
+    opacity: 0;
+    animation: typing $typing-duration ease $typing-delay both;
+    border-radius: var(--mantine-radius-lg);
+    background-color: var(--mantine-color-gray-1);
+
+    @media (prefers-reduced-motion: reduce) {
+      display: none;
+    }
+  }
+
+  .dot {
+    width: rem(6);
+    height: rem(6);
+    animation: bounce 0.35s ease-in-out $typing-delay 4 alternate;
+    border-radius: 50%;
+    background-color: var(--mantine-color-gray-6);
+
+    &:nth-child(2) {
+      animation-delay: $typing-delay + 0.1s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: $typing-delay + 0.2s;
+    }
+  }
+
+  .answer {
+    @include appear($answer-delay);
+
+    max-width: 92%;
+    padding: rem(12) rem(14);
+    border-radius: var(--mantine-radius-lg) var(--mantine-radius-lg)
+      var(--mantine-radius-lg) rem(4);
+    background-color: var(--mantine-color-gray-1);
+  }
+
+  .answerTitle {
+    font-size: rem(15);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .answerList {
+    @include unstyled-list;
+
+    display: flex;
+    flex-direction: column;
+    gap: rem(6);
+    margin-top: rem(8);
+  }
+
+  .answerItem {
+    font-size: rem(14);
+    position: relative;
+    padding-left: rem(18);
+
+    // Строки ответа появляются по очереди
+    @for $index from 1 through 3 {
+      &:nth-child(#{$index}) {
+        @include appear($answer-delay + $item-step * $index);
+      }
+    }
+
+    &::before {
+      position: absolute;
+      top: rem(7);
+      left: rem(2);
+      width: rem(7);
+      height: rem(7);
+      content: "";
+      border-radius: 50%;
+      background-color: var(--mantine-primary-color-filled);
+    }
+  }
+
+  .saved {
+    @include appear($saved-delay);
+
+    font-size: rem(14);
+    font-weight: 700;
+    color: var(--mantine-color-teal-9);
+    position: absolute;
+    right: rem(16);
+    bottom: 0;
+    margin: 0;
+    padding: rem(10) rem(16);
+    box-shadow: var(--mantine-shadow-md);
+    border: 1px solid var(--mantine-color-teal-2);
+    border-radius: var(--mantine-radius-xl);
+    background-color: var(--mantine-color-teal-0);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      right: auto;
+      left: rem(-24);
+    }
+  }
+}

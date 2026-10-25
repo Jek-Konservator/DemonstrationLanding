@@ -54,6 +54,20 @@
           "value": "1,200+",
           "label": "graduates"
         }
+      },
+      "chat": {
+        "label": "Example: the assistant summarises a sales spreadsheet in a minute",
+        "title": "AI assistant",
+        "status": "online",
+        "question": "Summarise October sales: what grew and what dropped",
+        "file": "sales_october.xlsx",
+        "answer": {
+          "title": "Done. October at a glance:",
+          "revenue": "Revenue: $54K, up 18% on September",
+          "channel": "Top channel: email campaigns, 41% of orders",
+          "regions": "Austin and Denver dropped: fewer repeat purchases"
+        },
+        "saved": "3 hours of manual work → 1 minute"
       }
     },
     "Audience": {
