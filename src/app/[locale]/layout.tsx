@@ -1,8 +1,11 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
+import { manrope } from "@ui/theme/fonts";
+import { UiColorSchemeScript, uiHtmlProps, UiProvider } from "@ui/UiProvider";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@shared/config/i18n/routing";
+import { Footer, Header, ScrollTop } from "@features/Layout";
 
 interface LocaleLayoutProps {
   children: ReactNode;
@@ -22,9 +25,19 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale}>
+    <html className={manrope.variable} lang={locale} {...uiHtmlProps}>
+      <head>
+        <UiColorSchemeScript />
+      </head>
       <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <UiProvider>
+            <Header />
+            {children}
+            <Footer />
+            <ScrollTop />
+          </UiProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

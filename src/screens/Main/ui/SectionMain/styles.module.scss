@@ -1,0 +1,110 @@
+.sectionMain {
+  padding-block: rem(48) rem(64);
+  background:
+    radial-gradient(
+      ellipse at top right,
+      var(--mantine-color-violet-1),
+      transparent 60%
+    ),
+    var(--mantine-color-body);
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    padding-block: rem(96) rem(112);
+  }
+
+  // Текст слева, чат справа; на телефоне чат — под цифрами
+  .content {
+    display: grid;
+    gap: rem(48);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      grid-template-columns: 1fr rem(420);
+      align-items: center;
+      gap: rem(48);
+    }
+
+    @include larger-than(map.get($breakpoints, "lg")) {
+      grid-template-columns: 1fr rem(460);
+      gap: rem(64);
+    }
+  }
+
+  .badge {
+    font-size: rem(14);
+    font-weight: 500;
+    color: var(--mantine-color-violet-8);
+    display: inline-block;
+    margin-bottom: rem(20);
+    padding: rem(6) rem(14);
+    border-radius: var(--mantine-radius-xl);
+    background-color: var(--mantine-color-violet-0);
+  }
+
+  .title {
+    font-size: rem(36);
+    line-height: 1.1;
+    max-width: rem(760);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(52);
+    }
+
+    @include larger-than(map.get($breakpoints, "lg")) {
+      font-size: rem(64);
+    }
+  }
+
+  .description {
+    font-size: rem(18);
+    color: var(--mantine-color-dimmed);
+    max-width: rem(620);
+    margin-top: rem(20);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(20);
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(12);
+    margin-top: rem(32);
+  }
+
+  .stats {
+    @include unstyled-list;
+
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    gap: rem(24);
+    margin-top: rem(48);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      gap: rem(56);
+      margin-top: rem(72);
+    }
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .statValue {
+    font-size: rem(28);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--mantine-primary-color-filled);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(40);
+    }
+  }
+
+  .statLabel {
+    font-size: rem(14);
+    color: var(--mantine-color-dimmed);
+  }
+}

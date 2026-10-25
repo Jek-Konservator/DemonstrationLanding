@@ -1,0 +1,11 @@
+.logo {
+  font-size: rem(20);
+  font-weight: 800;
+  color: var(--mantine-color-text);
+  white-space: nowrap;
+  text-decoration: none;
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    font-size: rem(24);
+  }
+}

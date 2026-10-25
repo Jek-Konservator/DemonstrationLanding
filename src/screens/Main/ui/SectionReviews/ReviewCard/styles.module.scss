@@ -1,0 +1,73 @@
+// Совпадает с AVATAR_COLORS в constants.ts
+// В кавычках: иначе Sass считает blue, teal и т. п. цветами, а не строками
+$avatar-colors: "violet", "teal", "blue", "grape", "indigo";
+
+.reviewCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: rem(24);
+  border: 1px solid var(--mantine-color-gray-2);
+  border-radius: var(--mantine-radius-lg);
+  background-color: var(--mantine-color-body);
+
+  .result {
+    font-size: rem(14);
+    font-weight: 700;
+    color: var(--mantine-color-teal-9);
+    align-self: flex-start;
+    margin: 0;
+    padding: rem(6) rem(12);
+    border-radius: var(--mantine-radius-xl);
+    background-color: var(--mantine-color-teal-0);
+  }
+
+  // Цитата растягивается — подписи авторов стоят на одной линии
+  .quote {
+    flex-grow: 1;
+    margin: rem(16) 0 0;
+  }
+
+  .text {
+    font-size: rem(16);
+    line-height: 1.6;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+    margin-top: rem(20);
+    padding-top: rem(16);
+    border-top: 1px solid var(--mantine-color-gray-2);
+  }
+
+  .avatar {
+    font-weight: 700;
+    display: inline-flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    width: rem(44);
+    height: rem(44);
+    border-radius: 50%;
+
+    @each $color in $avatar-colors {
+      &[data-color="#{$color}"] {
+        color: var(--mantine-color-#{$color}-9);
+        background-color: var(--mantine-color-#{$color}-1);
+      }
+    }
+  }
+
+  .name {
+    font-weight: 700;
+    display: block;
+  }
+
+  .position {
+    font-size: rem(14);
+    color: var(--mantine-color-dimmed);
+    display: block;
+  }
+}

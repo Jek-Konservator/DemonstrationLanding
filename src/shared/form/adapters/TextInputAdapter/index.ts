@@ -1,0 +1,1 @@
+export { TextInputAdapter } from "./TextInputAdapter";

@@ -1,0 +1,73 @@
+.header {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  height: $header-height;
+  border-bottom: 1px solid var(--mantine-color-gray-2);
+  background-color: var(--mantine-color-body);
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    height: $header-height-desktop;
+  }
+
+  // Тень при прокрутке — у псевдоэлемента, анимируется только opacity
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    box-shadow: var(--mantine-shadow-sm);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  &.isScrolled::after {
+    opacity: 1;
+  }
+
+  .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    gap: rem(16);
+  }
+
+  .actions {
+    display: flex;
+    gap: rem(12);
+    align-items: center;
+  }
+
+  // Телефон: логотип, язык и бургер. Кнопка записи — с планшета, меню — с десктопа
+  .navigation,
+  .cta {
+    display: none;
+  }
+
+  .cta {
+    @include larger-than(map.get($breakpoints, "sm")) {
+      display: inline-flex;
+    }
+  }
+
+  .navigation {
+    @include larger-than(map.get($breakpoints, "md")) {
+      display: block;
+    }
+  }
+
+  .burger {
+    @include larger-than(map.get($breakpoints, "md")) {
+      display: none;
+    }
+  }
+}
+
+// Drawer рендерится в портал — вне .header
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: rem(32);
+  align-items: flex-start;
+}

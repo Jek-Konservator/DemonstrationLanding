@@ -1,0 +1,37 @@
+.sectionPricing {
+  padding-block: rem(64);
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    padding-block: rem(112);
+  }
+
+  .title {
+    font-size: rem(28);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(44);
+    }
+  }
+
+  .description {
+    font-size: rem(18);
+    color: var(--mantine-color-dimmed);
+    max-width: rem(620);
+    margin-top: rem(12);
+  }
+
+  // Отступ сверху больше — под плашку «Популярный»
+  .list {
+    @include unstyled-list;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: rem(28);
+    margin-top: rem(48);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: rem(24);
+    }
+  }
+}

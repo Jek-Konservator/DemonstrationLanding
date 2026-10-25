@@ -1,0 +1,32 @@
+.audienceCard {
+  @include hoverLift;
+
+  height: 100%;
+  padding: rem(24);
+  border: 1px solid var(--mantine-color-gray-2);
+  border-radius: var(--mantine-radius-lg);
+  background-color: var(--mantine-color-body);
+
+  .iconWrapper {
+    color: var(--mantine-primary-color-filled);
+    display: inline-flex;
+    padding: rem(12);
+    border-radius: var(--mantine-radius-md);
+    background-color: var(--mantine-color-violet-0);
+  }
+
+  .icon {
+    width: rem(28);
+    height: rem(28);
+  }
+
+  .name {
+    font-size: rem(20);
+    margin-top: rem(20);
+  }
+
+  .description {
+    color: var(--mantine-color-dimmed);
+    margin-top: rem(8);
+  }
+}

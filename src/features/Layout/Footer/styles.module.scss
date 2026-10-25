@@ -1,0 +1,23 @@
+.footer {
+  border-top: 1px solid var(--mantine-color-gray-2);
+  background-color: var(--mantine-color-gray-0);
+  padding-block: rem(32);
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: rem(32);
+    }
+  }
+
+  .disclaimer,
+  .copyright {
+    color: var(--mantine-color-dimmed);
+  }
+}

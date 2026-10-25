@@ -1,0 +1,53 @@
+.sectionProgram {
+  padding-block: rem(64);
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    padding-block: rem(112);
+  }
+
+  .title {
+    font-size: rem(28);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(44);
+    }
+  }
+
+  .description {
+    font-size: rem(18);
+    color: var(--mantine-color-dimmed);
+    max-width: rem(620);
+    margin-top: rem(12);
+  }
+
+  .program {
+    @include fadeUp;
+
+    max-width: rem(860);
+    margin-top: rem(40);
+  }
+
+  .week {
+    font-size: rem(14);
+    font-weight: 700;
+    color: var(--mantine-primary-color-filled);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  .name {
+    font-size: rem(18);
+    font-weight: 700;
+    display: block;
+    margin-top: rem(4);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(20);
+    }
+  }
+
+  .text {
+    color: var(--mantine-color-dimmed);
+  }
+}

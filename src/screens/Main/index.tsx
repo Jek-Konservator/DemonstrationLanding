@@ -1,16 +1,34 @@
-import { useTranslations } from "next-intl";
+import { NAVIGATION_NAMES } from "@shared/constants/navigation";
+import {
+  SectionAudience,
+  SectionFaq,
+  SectionFeedback,
+  SectionMain,
+  SectionPricing,
+  SectionProgram,
+  SectionReviews,
+  SectionTeacher,
+  Seo,
+} from "./ui";
 
-// Экран главной страницы: собирает секции по порядку.
-// Пока — заглушка первого экрана, секции появятся на следующих этапах.
-const MainPage = () => {
-  const translate = useTranslations("Sections.Main");
+interface MainPageProps {
+  // Адрес сайта для JSON-LD: env читает app, экран получает готовое значение
+  siteUrl: string;
+}
 
-  return (
-    <main>
-      <h1>{translate("title")}</h1>
-      <p>{translate("description")}</p>
-    </main>
-  );
-};
+// Экран главной страницы: порядок секций задаётся только здесь
+const MainPage = ({ siteUrl }: MainPageProps) => (
+  <main>
+    <Seo siteUrl={siteUrl} />
+    <SectionMain id={NAVIGATION_NAMES.main} />
+    <SectionAudience id={NAVIGATION_NAMES.audience} />
+    <SectionProgram id={NAVIGATION_NAMES.program} />
+    <SectionTeacher id={NAVIGATION_NAMES.teacher} />
+    <SectionReviews id={NAVIGATION_NAMES.reviews} />
+    <SectionPricing id={NAVIGATION_NAMES.pricing} />
+    <SectionFaq id={NAVIGATION_NAMES.faq} />
+    <SectionFeedback id={NAVIGATION_NAMES.feedback} />
+  </main>
+);
 
 export default MainPage;

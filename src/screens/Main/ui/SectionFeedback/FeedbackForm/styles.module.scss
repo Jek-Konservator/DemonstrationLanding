@@ -1,0 +1,28 @@
+// Обёртка — точка отсчёта для затемнения загрузки и итога отправки
+.feedbackForm {
+  position: relative;
+  padding: rem(24);
+  box-shadow: var(--mantine-shadow-sm);
+  border: 1px solid var(--mantine-color-gray-2);
+  border-radius: var(--mantine-radius-lg);
+  background-color: var(--mantine-color-body);
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    padding: rem(36);
+  }
+
+  .form {
+    display: grid;
+    gap: rem(20);
+  }
+
+  // Убираем из потока и из виду, но не display: none — его боты пропускают
+  .honeypot {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+}

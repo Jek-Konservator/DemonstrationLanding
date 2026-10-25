@@ -1,0 +1,8 @@
+// Место под форму до её загрузки — чтобы страница не прыгала (CLS)
+.lazyFeedbackForm {
+  min-height: rem(440);
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    min-height: rem(470);
+  }
+}

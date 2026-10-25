@@ -3,10 +3,276 @@
     "title": "AI Practicum — AI tools for your job",
     "description": "Online course: in 6 weeks, learn to use AI at work — writing, analytics, presentations and automating routine tasks."
   },
+  "Layout": {
+    "Logo": {
+      "name": "AI Practicum",
+      "label": "AI Practicum — home"
+    },
+    "Header": {
+      "navigation": {
+        "label": "Page sections",
+        "audience": "Who it's for",
+        "program": "Curriculum",
+        "teacher": "Instructor",
+        "reviews": "Reviews",
+        "pricing": "Pricing",
+        "faq": "FAQ"
+      },
+      "cta": "Enroll",
+      "menu": "Menu",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
+    },
+    "LanguageSwitcher": {
+      "label": "Site language"
+    },
+    "Footer": {
+      "disclaimer": "Portfolio demo project: the school and the course are fictional.",
+      "copyright": "© {year} AI Practicum"
+    },
+    "ScrollTop": {
+      "label": "Back to top"
+    }
+  },
   "Sections": {
     "Main": {
+      "badge": "Online · 6 weeks · with a mentor",
       "title": "AI tools for your job",
-      "description": "A hands-on online course: in 6 weeks you will set up AI tools for your own tasks and start saving hours every week."
+      "description": "A hands-on online course: in 6 weeks you will set up AI tools for your own tasks and start saving hours every week.",
+      "primaryButton": "Enroll in the course",
+      "secondaryButton": "See the curriculum",
+      "stats": {
+        "label": "The course in numbers",
+        "weeks": {
+          "value": "6",
+          "label": "weeks of practice"
+        },
+        "tasks": {
+          "value": "24",
+          "label": "reviewed assignments"
+        },
+        "graduates": {
+          "value": "1,200+",
+          "label": "graduates"
+        }
+      },
+      "chat": {
+        "label": "Example: the assistant summarises a sales spreadsheet in a minute",
+        "title": "AI assistant",
+        "status": "online",
+        "question": "Summarise October sales: what grew and what dropped",
+        "file": "sales_october.xlsx",
+        "answer": {
+          "title": "Done. October at a glance:",
+          "revenue": "Revenue: $54K, up 18% on September",
+          "channel": "Top channel: email campaigns, 41% of orders",
+          "regions": "Austin and Denver dropped: fewer repeat purchases"
+        },
+        "saved": "3 hours of manual work → 1 minute"
+      }
+    },
+    "Audience": {
+      "title": "Who the course is for",
+      "description": "No coding required: you will learn to solve work tasks in the tools you already use.",
+      "list": {
+        "office": {
+          "name": "Office professionals",
+          "description": "Emails, reports and meeting notes in minutes instead of hours."
+        },
+        "marketing": {
+          "name": "Marketers",
+          "description": "Ideas, copy and visuals for campaigns, review and competitor analysis."
+        },
+        "analytics": {
+          "name": "Analysts",
+          "description": "Making sense of spreadsheets, formulas and insights without manual routine."
+        },
+        "business": {
+          "name": "Business owners",
+          "description": "Automated sales and support, quick drafts of documents."
+        }
+      }
+    },
+    "Program": {
+      "title": "Course curriculum",
+      "description": "Six weeks, each with short lessons and 4 hands-on assignments reviewed by a mentor.",
+      "week": "Week {number}",
+      "list": {
+        "basics": {
+          "name": "How neural networks work",
+          "description": "What language models can and cannot do, how to pick a tool for the task and keep sensitive data out of the chat."
+        },
+        "prompts": {
+          "name": "Prompts for work",
+          "description": "Prompt structure, roles and examples, follow-up questions. You build your own library of templates."
+        },
+        "texts": {
+          "name": "Texts and documents",
+          "description": "Emails, reports, meeting notes and editing: from a rough draft to a finished document in your style."
+        },
+        "data": {
+          "name": "Spreadsheets and data",
+          "description": "Working with exports, formulas, spotting patterns and clear conclusions for your manager."
+        },
+        "visuals": {
+          "name": "Presentations and visuals",
+          "description": "Presentation structure, generating images and diagrams, styling slides with your company template."
+        },
+        "automation": {
+          "name": "Automation and final project",
+          "description": "Connect a neural network to your work tools and present a project built on a real task from your job."
+        }
+      }
+    },
+    "Teacher": {
+      "title": "Instructor",
+      "avatar": "Illustration: instructor portrait",
+      "name": "Maria Vetrova",
+      "role": "Head of AI at a product company",
+      "description": "Spent eight years as an analyst and for the last three has been rolling out neural networks in sales, marketing and support teams. In the course she shows only what she uses every day.",
+      "facts": {
+        "label": "Instructor experience",
+        "experience": "8 years in data analytics",
+        "companies": "Brought neural networks to 30+ teams",
+        "graduates": "Taught 1,200+ graduates"
+      }
+    },
+    "Reviews": {
+      "title": "What graduates say",
+      "description": "How their work changed after the course, in their own words.",
+      "listLabel": "Graduate reviews",
+      "previous": "Previous reviews",
+      "next": "Next reviews",
+      "list": {
+        "anna": {
+          "name": "Anna Sokolova",
+          "role": "Accountant, manufacturing company",
+          "text": "Every month I pulled a reconciliation together from five exports by hand. In week three I set up an assistant — now it drafts the report and I just check the numbers.",
+          "result": "Reconciliation: 2 days → 3 hours"
+        },
+        "igor": {
+          "name": "Igor Lebedev",
+          "role": "Marketer, online store",
+          "text": "I was afraid AI writes generic copy. My mentor showed me how to give it context and examples — I barely edit our newsletters now.",
+          "result": "Newsletter: 4 hours → 40 minutes"
+        },
+        "olga": {
+          "name": "Olga Mironova",
+          "role": "HR manager",
+          "text": "Screening applications took half a day. I built a prompt that compares a CV with the job description and suggests interview questions. My colleagues asked me to teach them too.",
+          "result": "Screening 3× faster"
+        },
+        "dmitry": {
+          "name": "Dmitry Kovalev",
+          "role": "Head of sales",
+          "text": "I came for the reports, but the final project mattered most: I automated the deal summary for our morning meeting. It is ready by 9 am without me.",
+          "result": "Meeting summary — automatic"
+        },
+        "ksenia": {
+          "name": "Ksenia Belova",
+          "role": "Design studio owner",
+          "text": "I thought the course was for spreadsheet people. Turns out it helps me too: proposals, client replies, post ideas — everything is faster.",
+          "result": "Proposal: 3 hours → 30 minutes"
+        }
+      }
+    },
+    "Pricing": {
+      "title": "Pricing",
+      "description": "Every plan has the same curriculum — only the support differs. Instalments are available.",
+      "button": "Apply",
+      "popular": "Popular",
+      "featuresLabel": "What the {name} plan includes",
+      "features": {
+        "lessons": "All lessons and course materials",
+        "tasks": "24 hands-on assignments",
+        "chat": "Community chat",
+        "review": "Assignments reviewed by a mentor",
+        "certificate": "Certificate of completion",
+        "consultations": "3 one-on-one sessions with the instructor"
+      },
+      "list": {
+        "basic": {
+          "name": "Self-paced",
+          "description": "For those who prefer to figure things out alone.",
+          "price": "$190"
+        },
+        "standard": {
+          "name": "With a mentor",
+          "description": "Feedback on every assignment.",
+          "price": "$320"
+        },
+        "premium": {
+          "name": "Personal",
+          "description": "Your own work tasks reviewed one on one.",
+          "price": "$570"
+        }
+      }
+    },
+    "Faq": {
+      "title": "FAQ",
+      "list": {
+        "experience": {
+          "question": "Do I need coding experience?",
+          "answer": "No. We work in chatbots and familiar office tools, no code required."
+        },
+        "time": {
+          "question": "How much time does it take per week?",
+          "answer": "4–6 hours: about an hour of lessons, the rest goes to assignments."
+        },
+        "tools": {
+          "question": "Do I need paid AI subscriptions?",
+          "answer": "Free versions are enough for the course. Where a paid version is clearly better, we show you how to compare."
+        },
+        "access": {
+          "question": "How long do I keep access to the materials?",
+          "answer": "One year from the start of the course, including any lesson updates."
+        },
+        "certificate": {
+          "question": "Will I get a certificate?",
+          "answer": "Yes, on the With a mentor and Personal plans — after you present your final project."
+        },
+        "refund": {
+          "question": "Can I get a refund?",
+          "answer": "Yes, a full refund within 14 days of the course start, no questions asked."
+        }
+      }
+    },
+    "Feedback": {
+      "title": "Enroll in the course",
+      "description": "Leave your contacts — a mentor will call you within a day, answer your questions and help you choose a plan.",
+      "form": "Course application",
+      "fields": {
+        "name": {
+          "label": "Name",
+          "placeholder": "How should we address you"
+        },
+        "phone": {
+          "label": "Phone",
+          "placeholder": "+1 (___) ___-____"
+        },
+        "plan": {
+          "label": "Plan",
+          "placeholder": "Choose a plan"
+        },
+        "consent": "I agree to the processing of my personal data"
+      },
+      "submit": "Send application",
+      "success": {
+        "title": "Application sent",
+        "text": "A mentor will contact you within a day.",
+        "button": "Send another one"
+      },
+      "error": {
+        "title": "Could not send",
+        "text": "Check your connection and try again.",
+        "button": "Try again"
+      }
     }
+  },
+  "Errors": {
+    "required": "This field is required",
+    "phone": "Enter the full phone number",
+    "tooLong": "The value is too long",
+    "default": "Check the value"
   }
 }
