@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { CLIENT_ENV, clientEnvSchema } from "./client-env";
+import { CLIENT_ENV, clientEnvSchema, isHttpUrl } from "./client-env";
 import { validateEnv } from "./validate-env";
 
 const SITE_URL = "https://example.com";
@@ -21,5 +21,20 @@ describe("CLIENT_ENV", () => {
     expect(() =>
       validateEnv(clientEnvSchema, { NEXT_PUBLIC_SITE_URL: "not a url" }),
     ).toThrow(/NEXT_PUBLIC_SITE_URL/);
+  });
+
+  it("принимает localhost — так адрес задан в .env.example и в CI", () => {
+    expect(
+      validateEnv(clientEnvSchema, {
+        NEXT_PUBLIC_SITE_URL: "http://localhost:3000",
+      }),
+    ).toEqual({ NEXT_PUBLIC_SITE_URL: "http://localhost:3000" });
+  });
+
+  it("isHttpUrl: только http и https", () => {
+    expect(isHttpUrl("https://example.com")).toBe(true);
+    expect(isHttpUrl("http://localhost:3000")).toBe(true);
+    expect(isHttpUrl("ftp://example.com")).toBe(false);
+    expect(isHttpUrl("example.com")).toBe(false);
   });
 });
