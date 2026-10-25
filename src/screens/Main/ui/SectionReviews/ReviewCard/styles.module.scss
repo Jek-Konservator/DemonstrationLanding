@@ -1,5 +1,6 @@
 // Совпадает с AVATAR_COLORS в constants.ts
-$avatar-colors: violet, teal, blue, grape, indigo;
+// В кавычках: иначе Sass считает blue, teal и т. п. цветами, а не строками
+$avatar-colors: "violet", "teal", "blue", "grape", "indigo";
 
 .reviewCard {
   display: flex;
