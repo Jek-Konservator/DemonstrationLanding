@@ -32,6 +32,12 @@ $saved-delay: 3.3s;
   }
 }
 
+@keyframes blink {
+  50% {
+    opacity: 0.3;
+  }
+}
+
 // Появление с задержкой; без анимаций элемент виден сразу
 @mixin appear($delay) {
   animation: appear 0.5s ease $delay both;
@@ -90,12 +96,20 @@ $saved-delay: 3.3s;
     gap: rem(6);
     margin-left: auto;
 
+    // Точка «в сети» мигает. Сдвиг вниз — оптический: в «онлайн» одни
+    // строчные буквы, их середина ниже середины строки
     &::before {
       width: rem(8);
       height: rem(8);
       content: "";
+      transform: translateY(rem(1));
+      animation: blink 2s ease-in-out infinite;
       border-radius: 50%;
       background-color: var(--mantine-color-teal-6);
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
     }
   }
 

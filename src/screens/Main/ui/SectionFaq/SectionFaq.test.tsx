@@ -27,13 +27,27 @@ describe("SectionFaq", () => {
   it("рендерит вопросы по порядку заголовками h3", () => {
     renderWithProviders(<SectionFaq id={NAVIGATION_NAMES.faq} />);
 
+    // Последний h3 — заголовок карточки «Не нашли ответ?», он проверяется ниже
     const questions = screen
       .getAllByRole("heading", { level: 3 })
-      .map((heading) => heading.textContent);
+      .map((heading) => heading.textContent)
+      .slice(0, -1);
 
     expect(questions).toEqual(
       FAQ_NAMES.map((name) => texts.list[name].question),
     );
+  });
+
+  it("рендерит карточку «Не нашли ответ?» со ссылкой на форму", () => {
+    renderWithProviders(<SectionFaq id={NAVIGATION_NAMES.faq} />);
+
+    expect(
+      screen.getByRole("heading", { level: 3, name: texts.contact.title }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(texts.contact.text)).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: texts.contact.button }),
+    ).toHaveAttribute("href", `#${NAVIGATION_NAMES.feedback}`);
   });
 
   it("все вопросы закрыты, по клику открывается ответ", async () => {

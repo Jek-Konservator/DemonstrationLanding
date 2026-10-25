@@ -26,12 +26,15 @@ describe("CountUp", () => {
     });
 
     expect(getCurrent(container)).toBe("0+");
+    // Пока считается — моноширинные цифры
+    expect(container.querySelector(".current")).toHaveClass("isCounting");
 
     act(() => {
       vi.advanceTimersByTime(2000);
     });
 
     expect(getCurrent(container)).toBe("1 200+");
+    expect(container.querySelector(".current")).not.toHaveClass("isCounting");
     expect(container.querySelector(".ghost")).toHaveTextContent("1 200+");
   });
 

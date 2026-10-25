@@ -24,7 +24,7 @@ export const SectionPricing = ({ id }: SectionPricingProps) => {
         <Text className={styles.description}>{translate("description")}</Text>
         <ul className={styles.list}>
           {PRICING_NAMES.map((name) => (
-            <li key={name}>
+            <li className={styles.item} key={name}>
               <PricingCard
                 action={
                   <PlanButton isPrimary={name === POPULAR_PRICING} plan={name}>

@@ -1,5 +1,6 @@
 "use client";
 
+import { clsx } from "clsx";
 import { useCountUp } from "@shared/hooks/useCountUp";
 import { useIntersectionObserver } from "@shared/hooks/useIntersectionObserver";
 import { parseStatValue } from "./parseStatValue";
@@ -19,6 +20,7 @@ export const CountUp = ({ value }: CountUpProps) => {
   const current = useCountUp(parsed?.target ?? 0, {
     isEnabled: isVisible && parsed !== null,
   });
+  const isCounting = parsed !== null && current !== parsed.target;
 
   return (
     <span className={styles.countUp} ref={ref}>
@@ -26,7 +28,7 @@ export const CountUp = ({ value }: CountUpProps) => {
       <span aria-hidden className={styles.ghost}>
         {value}
       </span>
-      <span className={styles.current}>
+      <span className={clsx(styles.current, isCounting && styles.isCounting)}>
         {parsed ? parsed.format(current) : value}
       </span>
     </span>
