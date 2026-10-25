@@ -5,8 +5,10 @@ import { Button } from "@ui/Button";
 import { Container } from "@ui/Container";
 import { Drawer } from "@ui/Drawer";
 import { useDisclosure } from "@ui/hooks/useDisclosure";
+import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
 import { NAVIGATION_NAMES } from "@shared/constants/navigation";
+import { useIsScrolled } from "@shared/hooks/useIsScrolled";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { Logo } from "../Logo";
 import { Navigation } from "../Navigation";
@@ -15,9 +17,11 @@ import styles from "./styles.module.scss";
 export const Header = () => {
   const translate = useTranslations("Layout.Header");
   const [isMenuOpened, menu] = useDisclosure(false);
+  // Под шапкой уже есть контент — отделяем её тенью
+  const isScrolled = useIsScrolled();
 
   return (
-    <header className={styles.header}>
+    <header className={clsx(styles.header, isScrolled && styles.isScrolled)}>
       <Container className={styles.inner}>
         <Logo />
         <Navigation className={styles.navigation} />

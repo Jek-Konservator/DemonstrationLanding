@@ -2,7 +2,7 @@ import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { NAVIGATION_NAMES } from "@shared/constants/navigation";
-import { renderWithProviders } from "@shared/testing";
+import { renderWithProviders, scrollWindowTo } from "@shared/testing";
 import { Header } from ".";
 import ru from "../../../../dictionaries/ru.json";
 
@@ -55,5 +55,17 @@ describe("Header", () => {
     await waitFor(() => {
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     });
+  });
+
+  it("при прокрутке страницы шапка получает тень", () => {
+    renderWithProviders(<Header />);
+
+    expect(screen.getByRole("banner")).not.toHaveClass("isScrolled");
+
+    scrollWindowTo(200);
+
+    expect(screen.getByRole("banner")).toHaveClass("isScrolled");
+
+    scrollWindowTo(0);
   });
 });

@@ -5,6 +5,7 @@ import { Title } from "@ui/Title";
 import { useTranslations } from "next-intl";
 import { NAVIGATION_NAMES } from "@shared/constants/navigation";
 import { STAT_NAMES } from "./constants";
+import { CountUp } from "./CountUp";
 import { HeroChat } from "./HeroChat";
 import styles from "./styles.module.scss";
 
@@ -48,7 +49,7 @@ export const SectionMain = ({ id }: SectionMainProps) => {
             {STAT_NAMES.map((name) => (
               <li className={styles.stat} key={name}>
                 <span className={styles.statValue}>
-                  {translate(`stats.${name}.value`)}
+                  <CountUp value={translate(`stats.${name}.value`)} />
                 </span>
                 <span className={styles.statLabel}>
                   {translate(`stats.${name}.label`)}

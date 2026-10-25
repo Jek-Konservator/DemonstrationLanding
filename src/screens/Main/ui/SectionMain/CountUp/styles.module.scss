@@ -1,0 +1,18 @@
+// Обе строки в одной ячейке сетки: ширину задаёт самая длинная — итоговая
+.countUp {
+  display: inline-grid;
+
+  .ghost,
+  .current {
+    grid-area: 1 / 1;
+  }
+
+  .ghost {
+    visibility: hidden;
+  }
+
+  // Цифры одной ширины — число не дрожит, пока считается
+  .current {
+    font-variant-numeric: tabular-nums;
+  }
+}

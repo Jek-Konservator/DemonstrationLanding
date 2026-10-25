@@ -1,4 +1,6 @@
 .audienceCard {
+  @include hoverLift;
+
   height: 100%;
   padding: rem(24);
   border: 1px solid var(--mantine-color-gray-2);

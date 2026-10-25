@@ -34,6 +34,42 @@ $header-height-desktop: 80px;
   list-style: none;
 }
 
+// Карточка приподнимается при наведении. Тень — у псевдоэлемента, анимируется
+// его opacity: перерисовывать box-shadow каждый кадр дорого. Только для мыши
+@mixin hoverLift {
+  position: relative;
+  transition: transform 0.2s ease;
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    box-shadow: var(--mantine-shadow-lg);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(rem(-4));
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
 // Появление при скролле: элемент скрыт, пока у него нет класса .isVisible
 @mixin fadeUp($delay: 0s) {
   opacity: 0;
