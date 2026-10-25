@@ -13,17 +13,18 @@
 
 **Состояние репозитория**
 
-- GitHub: https://github.com/Jek-Konservator/DemonstrationLanding (публичный, `gh` залогинен с правом `workflow`). `dev` слит в `main` через PR #1 (merge-коммит, история сохранена). Работаем в `dev`, в `main` — через PR.
+- GitHub: https://github.com/Jek-Konservator/DemonstrationLanding (публичный, `gh` залогинен с правом `workflow`). `dev` сливается в `main` через PR (#1–#3, merge-коммиты, история сохраняется). Работаем в `dev`, в `main` — через PR.
 - Vercel: https://demonstration-landing.vercel.app, проект `demonstration-landing` в команде `romans-projects-ab5e729c`, Git-интеграция подключена: `main` → прод, остальные ветки и PR → preview. `NEXT_PUBLIC_SITE_URL` задан для Production и Preview (адрес прода — canonical у превью смотрит на прод). Node — 22 из `engines`.
-- `npm run check` и `npm run build` зелёные, CI на GitHub зелёный, покрытие 100%, First Load JS главной — 150 kB (после 6a–6c, было 148). Не запускать `build` при работающем `npm run dev` — оба пишут в `.next` (изредка v8 показывает 99.9% на `FeedbackForm.tsx` — артефакт двойной загрузки модуля, порог 80%).
+- `npm run check` и `npm run build` зелёные, CI на GitHub зелёный, покрытие 100%, First Load JS главной — 151 kB. Не запускать `build` при работающем `npm run dev` — оба пишут в `.next` (изредка v8 показывает 99.9% на `FeedbackForm.tsx` — артефакт двойной загрузки модуля, порог 80%).
 - Для `npm run build` локально нужен `.env.local` (`cp .env.example .env.local`): без `NEXT_PUBLIC_SITE_URL` сборка падает — так и задумано. `vercel link` дописал туда `VERCEL_OIDC_TOKEN` — не коммитить.
 - Lock-файл: локально npm 11 (Node 24), в CI и на Vercel — npm 10 (Node 22). npm 11 не пишет в lock необязательную peer-зависимость `@swc/helpers`, и `npm ci` в npm 10 падает. После изменения зависимостей — `npx npm@10 install --package-lock-only`.
-- Готово: этапы 1–5 и 6a–6c, форма проверена руками в браузере (демо-режим), деплой.
+- Готово: все этапы 1–6. Форма проверена руками в браузере (демо-режим).
 
-**Следующий шаг — этап 6d**
+**Итоги этапа 6d**
 
 - Lighthouse на проде (25.10, локально, скрипт Kaspersky заблокирован через `--blocked-url-patterns`, gzip он всё равно снимает — цифры чуть занижены): мобильный 94 / 100 / 100 / 100 (LCP 2,6 с, CLS 0), десктоп 99 / 100 / 100 / 100. CSS Mantine по компонентам не нужен. PageSpeed Insights без API-ключа упирается в общую дневную квоту.
-- README: бейдж CI, ссылка на демо, скриншоты (`docs/screenshots/`, сняты puppeteer-core + Edge с прода), Lighthouse, переменные окружения, деплой. Осталось: материалы для Kwork (скриншоты, видео).
+- README: бейдж CI, ссылка на демо, скриншоты (`docs/screenshots/`, сняты puppeteer-core + Edge с прода), Lighthouse, переменные окружения, деплой.
+- Материалы для Kwork — в `kwork/` (в `.gitignore`, только локально): обложка и коллажи 1320×880, страница целиком, видео-проход 41 с, текст карточки в `kwork/description.md`. Загрузить на Kwork — Роман. Скрипты съёмки (puppeteer-core + Edge, ffmpeg из winget) — во временной папке сессии; видео — из кадров CDP `Page.startScreencast` с метками времени через concat ffmpeg: встроенный `page.screencast` puppeteer теряет или дублирует кадры (`round(fps × Δt)`).
 
 **Открытые хвосты**
 
@@ -51,12 +52,12 @@
 - [x] **4. Форма заявки** — схема yup, адаптеры полей, стор на createQuery, состояния Loading/Success/Error, route handler `/api/lead` с отправкой в Telegram, honeypot.
 - [x] **5. SEO** — metadata, hreflang, sitemap.ts, robots.ts, OG-картинка, JSON-LD, Lighthouse ≥ 90.
       Плюс вес страницы: 347 → 148 kB (реэкспорты UI Kit, ленивая форма). Lighthouse перемерить на Vercel.
-- [ ] **6. Финал** — сначала «уровень» визуала, потом README со скриншотами и бейджем CI, деплой на Vercel, скриншоты и видео для Kwork.
+- [x] **6. Финал** — сначала «уровень» визуала, потом README со скриншотами и бейджем CI, деплой на Vercel, скриншоты и видео для Kwork.
   - [x] **6a.** Первый экран: иллюстрация-чат с ассистентом справа (`HeroChat`).
   - [x] **6b.** Отзывы со слайдером на `scroll-snap` (`SectionReviews`, хук `useScrollCarousel`), пункт «Отзывы» в меню.
   - [x] **6c.** Микровзаимодействия: подъём карточек при наведении, тень шапки при скролле, счёт цифр первого экрана.
   - [x] **6e.** Полировка после ревью прода: карточки «Формат обучения» у программы и «Не нашли ответ?» у FAQ (на десктопе справа, программа — sticky), строки карточек тарифов и отзывов на `subgrid`, новая иллюстрация преподавателя.
-  - [ ] **6d.** Деплой, Lighthouse на Vercel, README, материалы для Kwork.
+  - [x] **6d.** Деплой, Lighthouse на Vercel, README, материалы для Kwork.
 
 ## Принятые решения
 
