@@ -6,6 +6,7 @@ export const NAVIGATION_ITEMS = [
   "audience",
   "program",
   "teacher",
+  "reviews",
   "pricing",
   "faq",
 ] as const satisfies readonly NavigationName[];

@@ -3,7 +3,12 @@
     @include unstyled-list;
 
     display: flex;
-    gap: rem(24);
+    gap: rem(18);
+
+    // Шесть пунктов на 992px помещаются только с узким отступом
+    @include larger-than(map.get($breakpoints, "lg")) {
+      gap: rem(24);
+    }
 
     &.isVertical {
       flex-direction: column;
@@ -14,6 +19,7 @@
   .link {
     font-weight: 500;
     color: var(--mantine-color-text);
+    white-space: nowrap;
     text-decoration: none;
     transition: color 0.2s ease;
 

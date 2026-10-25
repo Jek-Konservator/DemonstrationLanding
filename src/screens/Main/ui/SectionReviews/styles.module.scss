@@ -1,0 +1,108 @@
+$slide-gap: rem(16);
+$slide-gap-desktop: rem(24);
+
+// Стрелка — уголок из двух рамок, как у ScrollTop
+@mixin arrow($angle) {
+  width: rem(10);
+  height: rem(10);
+  transform: rotate($angle);
+  border-top: 2px solid currentcolor;
+  border-left: 2px solid currentcolor;
+}
+
+.sectionReviews {
+  padding-block: rem(64);
+  background-color: var(--mantine-color-violet-0);
+
+  @include larger-than(map.get($breakpoints, "md")) {
+    padding-block: rem(112);
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: rem(24);
+  }
+
+  .title {
+    font-size: rem(28);
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      font-size: rem(44);
+    }
+  }
+
+  .description {
+    font-size: rem(18);
+    color: var(--mantine-color-dimmed);
+    margin-top: rem(12);
+  }
+
+  // На телефоне листают свайпом — стрелки со второго брейкпоинта
+  .controls {
+    display: none;
+    flex-shrink: 0;
+    gap: rem(12);
+
+    @include larger-than(map.get($breakpoints, "sm")) {
+      display: flex;
+    }
+  }
+
+  .arrowPrev {
+    @include arrow(-45deg);
+
+    margin-left: rem(4);
+  }
+
+  .arrowNext {
+    @include arrow(135deg);
+
+    margin-right: rem(4);
+  }
+
+  .reviews {
+    @include fadeUp;
+
+    margin-top: rem(40);
+  }
+
+  // Лента: прокрутка по горизонтали с примагничиванием к карточкам
+  .track {
+    @include unstyled-list;
+
+    display: flex;
+    overflow-x: auto;
+    gap: $slide-gap;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      gap: $slide-gap-desktop;
+    }
+  }
+
+  // Телефон — карточка и край следующей (подсказка, что можно листать),
+  // планшет — две, десктоп — три
+  .slide {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+
+    @include larger-than(map.get($breakpoints, "sm")) {
+      flex-basis: calc((100% - #{$slide-gap}) / 2);
+    }
+
+    @include larger-than(map.get($breakpoints, "md")) {
+      flex-basis: calc((100% - #{$slide-gap-desktop}) / 2);
+    }
+
+    @include larger-than(map.get($breakpoints, "lg")) {
+      flex-basis: calc((100% - 2 * #{$slide-gap-desktop}) / 3);
+    }
+  }
+}

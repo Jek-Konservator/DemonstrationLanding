@@ -4,6 +4,7 @@ export const NAVIGATION_NAMES = {
   audience: "audience",
   program: "program",
   teacher: "teacher",
+  reviews: "reviews",
   pricing: "pricing",
   faq: "faq",
   feedback: "feedback",

@@ -6,6 +6,7 @@ import {
   SectionMain,
   SectionPricing,
   SectionProgram,
+  SectionReviews,
   SectionTeacher,
   Seo,
 } from "./ui";
@@ -23,6 +24,7 @@ const MainPage = ({ siteUrl }: MainPageProps) => (
     <SectionAudience id={NAVIGATION_NAMES.audience} />
     <SectionProgram id={NAVIGATION_NAMES.program} />
     <SectionTeacher id={NAVIGATION_NAMES.teacher} />
+    <SectionReviews id={NAVIGATION_NAMES.reviews} />
     <SectionPricing id={NAVIGATION_NAMES.pricing} />
     <SectionFaq id={NAVIGATION_NAMES.faq} />
     <SectionFeedback id={NAVIGATION_NAMES.feedback} />

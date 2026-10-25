@@ -4,5 +4,6 @@ export { SectionFeedback } from "./SectionFeedback";
 export { SectionMain } from "./SectionMain";
 export { SectionPricing } from "./SectionPricing";
 export { SectionProgram } from "./SectionProgram";
+export { SectionReviews } from "./SectionReviews";
 export { SectionTeacher } from "./SectionTeacher";
 export { Seo } from "./Seo";
