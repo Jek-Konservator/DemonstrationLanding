@@ -22,8 +22,8 @@
 
 **Следующий шаг — этап 6d**
 
-- Lighthouse (мобильный) — перемерить на Vercel. Локально мешает Kaspersky (встраивает скрипт по HTTP и снимает gzip): Performance 89–90, Accessibility 100, Best Practices 82, SEO 92 (canonical на тестовый домен). Если на Vercel Performance < 90 — подключать CSS Mantine по компонентам вместо `styles.css` (30 КБ блокирующего CSS).
-- README со скриншотами и бейджем CI (в нём шаг `cp .env.example .env.local`), материалы для Kwork.
+- Lighthouse на проде (25.10, локально, скрипт Kaspersky заблокирован через `--blocked-url-patterns`, gzip он всё равно снимает — цифры чуть занижены): мобильный 94 / 100 / 100 / 100 (LCP 2,6 с, CLS 0), десктоп 99 / 100 / 100 / 100. CSS Mantine по компонентам не нужен. PageSpeed Insights без API-ключа упирается в общую дневную квоту.
+- README: бейдж CI, ссылка на демо, скриншоты (`docs/screenshots/`, сняты puppeteer-core + Edge с прода), Lighthouse, переменные окружения, деплой. Осталось: материалы для Kwork (скриншоты, видео).
 
 **Открытые хвосты**
 
