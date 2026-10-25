@@ -9,20 +9,19 @@
 - Репозиторий публичный, демо — на Vercel. Даты коммитов не подделываем, история — настоящая.
 - Роман должен понимать каждую строчку: на непонятное — объяснять, а не просто писать код.
 
-## Где остановились (23.10.2026)
+## Где остановились (25.10.2026)
 
 **Состояние репозитория**
 
-- Работаем в ветке `dev`, последний коммит — `be7cd08 feat(ui): микровзаимодействия — подъём карточек, тень шапки, счёт цифр`. Рабочая копия чистая, `npm run check` зелёный, покрытие 100%. **`npm run build` после 6a–6c не запускался** (параллельно шёл `npm run dev`, оба пишут в `.next`) — прогнать первым делом в 6d и сверить First Load JS (было 148 kB) (изредка v8 показывает 99.9% на `FeedbackForm.tsx` — артефакт двойной загрузки модуля, порог 80%).
-- Для `npm run build` локально нужен `.env.local` (`cp .env.example .env.local`): без `NEXT_PUBLIC_SITE_URL` сборка падает — так и задумано.
-- `dev` никуда не запушен и не слит в `main`. На `main` — только каркас (`0e2c2b8`, в нём по ошибке старый `package.json` с ESLint 8 — исправлено в `dev` коммитом `c42940e`, в `main` попадёт при слиянии).
-- Готово: этапы 1–5 — каркас, тема и UI Kit, Layout, все секции, форма заявки с `/api/lead` и Telegram (демо-режим без ключей), SEO (canonical, hreflang, Open Graph, OG-картинки, sitemap, robots, JSON-LD, иконка), облегчение бандла: First Load JS главной — 148 kB.
+- GitHub: https://github.com/Jek-Konservator/DemonstrationLanding (публичный, `gh` залогинен с правом `workflow`). `dev` слит в `main` через PR #1 (merge-коммит, история сохранена). Работаем в `dev`, в `main` — через PR.
+- Vercel: https://demonstration-landing.vercel.app, проект `demonstration-landing` в команде `romans-projects-ab5e729c`, Git-интеграция подключена: `main` → прод, остальные ветки и PR → preview. `NEXT_PUBLIC_SITE_URL` задан для Production и Preview (адрес прода — canonical у превью смотрит на прод). Node — 22 из `engines`.
+- `npm run check` и `npm run build` зелёные, CI на GitHub зелёный, покрытие 100%, First Load JS главной — 150 kB (после 6a–6c, было 148). Не запускать `build` при работающем `npm run dev` — оба пишут в `.next` (изредка v8 показывает 99.9% на `FeedbackForm.tsx` — артефакт двойной загрузки модуля, порог 80%).
+- Для `npm run build` локально нужен `.env.local` (`cp .env.example .env.local`): без `NEXT_PUBLIC_SITE_URL` сборка падает — так и задумано. `vercel link` дописал туда `VERCEL_OIDC_TOKEN` — не коммитить.
+- Lock-файл: локально npm 11 (Node 24), в CI и на Vercel — npm 10 (Node 22). npm 11 не пишет в lock необязательную peer-зависимость `@swc/helpers`, и `npm ci` в npm 10 падает. После изменения зависимостей — `npx npm@10 install --package-lock-only`.
+- Готово: этапы 1–5 и 6a–6c, форма проверена руками в браузере (демо-режим), деплой.
 
-**Следующий шаг — этап 6: финал**
+**Следующий шаг — этап 6d**
 
-- `.env.local` у Романа создан из `.env.example` (демо-режим).
-- Отправить форму руками в браузере (`npm run dev`): ошибки пустых полей, выбор тарифа кнопкой в «Тарифах», «Заявка отправлена» в демо-режиме. До сих пор — только тесты и `curl` по `/api/lead`.
-- Деплой на Vercel: `NEXT_PUBLIC_SITE_URL` = адрес деплоя (иначе сборка упадёт); ключи Telegram — по желанию. Node — из `.nvmrc`.
 - Lighthouse (мобильный) — перемерить на Vercel. Локально мешает Kaspersky (встраивает скрипт по HTTP и снимает gzip): Performance 89–90, Accessibility 100, Best Practices 82, SEO 92 (canonical на тестовый домен). Если на Vercel Performance < 90 — подключать CSS Mantine по компонентам вместо `styles.css` (30 КБ блокирующего CSS).
 - README со скриншотами и бейджем CI (в нём шаг `cp .env.example .env.local`), материалы для Kwork.
 
@@ -36,6 +35,7 @@
 
 - В индекс сами попадают лишние файлы (похоже, WebStorm добавляет новые файлы в VCS), и WebStorm уже однажды записал старые версии `package.json` и `docs/` поверх новых. Поэтому коммитим только так: `git add <пути> && git commit -- <пути>`, после — `git show --stat HEAD`. Перед коммитом сверять `package.json` и `docs/` с договорённым.
 - Перед коммитом Роман смотрит diff; коммиты — после его «ок». Сообщения — conventional commits на русском, конфиги отдельно от кода, до 15–20 файлов.
+- `gh` — `"C:\Program Files\GitHub CLI\gh.exe"` (в PATH старых сессий его нет). `curl` по HTTPS локально — с `--ssl-no-revoke` (Kaspersky ломает проверку отзыва сертификата). В Git Bash пути `vercel api /v9/...` — с `MSYS_NO_PATHCONV=1`.
 - Проверка вёрстки: `npm run build && npx next start -p 3123`, скриншоты headless Edge (`--headless=old --screenshot`). Окно уже 492px Windows не даёт — для 360px открывать страницу в `<iframe width="360">`.
 
 ## Этапы
