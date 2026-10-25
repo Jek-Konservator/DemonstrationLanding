@@ -1,6 +1,8 @@
 "use client";
 
-import "@mantine/core/styles.css";
+// Стили Mantine — в @layer mantine: стили вне слоя всегда сильнее, поэтому наши
+// CSS-модули перекрывают Mantine при любом порядке загрузки CSS (в dev он другой)
+import "@mantine/core/styles.layer.css";
 import "@ui/theme/global.scss";
 import type { ReactNode } from "react";
 import { MantineProvider } from "@mantine/core";
