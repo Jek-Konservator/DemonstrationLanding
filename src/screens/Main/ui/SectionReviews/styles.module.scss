@@ -68,13 +68,20 @@ $slide-gap-desktop: rem(24);
     margin-top: rem(40);
   }
 
-  // Лента: прокрутка по горизонтали с примагничиванием к карточкам
+  // Лента: прокрутка по горизонтали с примагничиванием к карточкам.
+  // Колонки — карточки, три общие строки (результат, цитата, автор) —
+  // подписи авторов стоят на одной линии, даже если должность в две строки.
+  // Телефон — карточка и край следующей (подсказка, что можно листать),
+  // планшет — две, десктоп — три
   .track {
     @include unstyled-list;
 
-    display: flex;
+    display: grid;
     overflow-x: auto;
-    gap: $slide-gap;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-columns: 85%;
+    grid-auto-flow: column;
+    column-gap: $slide-gap;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
 
@@ -82,27 +89,24 @@ $slide-gap-desktop: rem(24);
       display: none;
     }
 
-    @include larger-than(map.get($breakpoints, "md")) {
-      gap: $slide-gap-desktop;
-    }
-  }
-
-  // Телефон — карточка и край следующей (подсказка, что можно листать),
-  // планшет — две, десктоп — три
-  .slide {
-    flex: 0 0 85%;
-    scroll-snap-align: start;
-
     @include larger-than(map.get($breakpoints, "sm")) {
-      flex-basis: calc((100% - #{$slide-gap}) / 2);
+      grid-auto-columns: calc((100% - #{$slide-gap}) / 2);
     }
 
     @include larger-than(map.get($breakpoints, "md")) {
-      flex-basis: calc((100% - #{$slide-gap-desktop}) / 2);
+      grid-auto-columns: calc((100% - #{$slide-gap-desktop}) / 2);
+      column-gap: $slide-gap-desktop;
     }
 
     @include larger-than(map.get($breakpoints, "lg")) {
-      flex-basis: calc((100% - 2 * #{$slide-gap-desktop}) / 3);
+      grid-auto-columns: calc((100% - 2 * #{$slide-gap-desktop}) / 3);
     }
+  }
+
+  .slide {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    scroll-snap-align: start;
   }
 }

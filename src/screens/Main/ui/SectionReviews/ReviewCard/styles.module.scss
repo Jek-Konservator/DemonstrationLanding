@@ -3,9 +3,12 @@
 $avatar-colors: "violet", "teal", "blue", "grape", "indigo";
 
 .reviewCard {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  // Три строки: результат, цитата, автор. В ленте строки общие
+  // с соседними карточками — подписи авторов на одной линии
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 0;
   padding: rem(24);
   border: 1px solid var(--mantine-color-gray-2);
   border-radius: var(--mantine-radius-lg);
@@ -15,16 +18,14 @@ $avatar-colors: "violet", "teal", "blue", "grape", "indigo";
     font-size: rem(14);
     font-weight: 700;
     color: var(--mantine-color-teal-9);
-    align-self: flex-start;
+    place-self: start;
     margin: 0;
     padding: rem(6) rem(12);
     border-radius: var(--mantine-radius-xl);
     background-color: var(--mantine-color-teal-0);
   }
 
-  // Цитата растягивается — подписи авторов стоят на одной линии
   .quote {
-    flex-grow: 1;
     margin: rem(16) 0 0;
   }
 

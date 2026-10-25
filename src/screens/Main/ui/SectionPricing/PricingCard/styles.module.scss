@@ -1,9 +1,12 @@
 .pricingCard {
   @include hoverLift;
 
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  // Пять строк: название, описание, цена, состав, кнопка. Внутри .item
+  // секции строки общие с соседними карточками, иначе — свои
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  row-gap: 0;
   padding: rem(28) rem(24);
   border: 1px solid var(--mantine-color-gray-2);
   border-radius: var(--mantine-radius-lg);
@@ -45,7 +48,6 @@
     @include unstyled-list;
 
     display: grid;
-    flex-grow: 1;
     align-content: start;
     gap: rem(10);
     margin-top: rem(20);

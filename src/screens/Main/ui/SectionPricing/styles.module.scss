@@ -34,4 +34,15 @@
       gap: rem(24);
     }
   }
+
+  // Десктоп: строки карточек общие (subgrid) — цены, списки и кнопки
+  // стоят на одной линии, даже если описание у одной карточки в две строки
+  .item {
+    @include larger-than(map.get($breakpoints, "md")) {
+      display: grid;
+      grid-row: span 5;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+  }
 }
